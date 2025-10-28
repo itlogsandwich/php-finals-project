@@ -63,4 +63,3 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 =======
 # php-finals-project
 totally not a suspicious finals project. collaborative work with Kyle
->>>>>>> b78f9368ee147cd027e74336ed00bd142fd2871d
