@@ -2,7 +2,8 @@
 
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CannabisController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ListingController; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,11 +22,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [CannabisController::class, 'home'])->name('cannabis.home');
-//Products
+//DISPLAYS THE HOME OR MAIN MENU
+Route::get('/home', [ProductController::class, 'productIndex'])->name('home');
+
+
+//PRODUCT AND LISTING
 Route::middleware('auth')->group(function()
 {
+    Route::get('/listing/create', [ListingController::class, 'listingForm'])->name('listing.form');
+    Route::post('/listing/create', [ListingController::class, 'listingCreate'])->name('listing.create');
 
+    Route::get('listing/show', [ListingController::class, 'listingShow'])->name('listing.show');
 });
 
 require __DIR__.'/auth.php';

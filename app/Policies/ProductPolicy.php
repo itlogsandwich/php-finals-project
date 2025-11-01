@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
-use App\Models\Cannabis;
+use App\Models\Product;
 use App\Models\User;
 
-class CannabisPolicy
+class ProductPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class CannabisPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Cannabis $cannabis): bool
+    public function view(User $user, Product $product): bool
     {
         return false;
     }
@@ -35,7 +35,7 @@ class CannabisPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Cannabis $cannabis): bool
+    public function update(User $user, Product $product): bool
     {
         return false;
     }
@@ -43,7 +43,7 @@ class CannabisPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Cannabis $cannabis): bool
+    public function delete(User $user, Product $product): bool
     {
         return false;
     }
@@ -51,7 +51,7 @@ class CannabisPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Cannabis $cannabis): bool
+    public function restore(User $user, Product $product): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class CannabisPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Cannabis $cannabis): bool
+    public function forceDelete(User $user, Product $product): bool
     {
         return false;
     }

@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cannabis;
+use App\Models\Product;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCannabisRequest;
-use App\Http\Requests\UpdateCannabisRequest;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
-class CannabisController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function home()
+    public function productIndex()
     {
-        $cannabis = Cannabis::all();
-
-        return view('cannabis.home', compact('cannabis'));
+        $products = Product::all();
+        
+        return view ('products.home', compact('products'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function createListing()
+    public function create()
     {
         //
     }
@@ -30,7 +30,7 @@ class CannabisController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCannabisRequest $request)
+    public function store(StoreProductRequest $request)
     {
         //
     }
@@ -38,7 +38,7 @@ class CannabisController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Cannabis $cannabis)
+    public function show(Product $product)
     {
         //
     }
@@ -46,7 +46,7 @@ class CannabisController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cannabis $cannabis)
+    public function edit(Product $product)
     {
         //
     }
@@ -54,7 +54,7 @@ class CannabisController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCannabisRequest $request, Cannabis $cannabis)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         //
     }
@@ -62,7 +62,7 @@ class CannabisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cannabis $cannabis)
+    public function destroy(Product $product)
     {
         //
     }
