@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Listing;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -16,7 +17,9 @@ class ProductController extends Controller
     {
         $products = Product::all();
         
-        return view ('products.home', compact('products'));
+       $listings = Listing::with('user_id')->get(); 
+        
+        return view ('products.home', compact('products', 'listings'));
     }
 
     /**

@@ -45,7 +45,7 @@ class ListingController extends Controller
             'products_id' => $product->id,
         ]);
 
-        return redirect()->route('listing.show');
+        return redirect()->route('listing.show')->with('success', 'Listing added successfully!');
     }
     /**
      * Store a newly created resource in storage.

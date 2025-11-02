@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Providers;
-
+use App\Providers\Blade;
 use Illuminate\Support\ServiceProvider;
-
+use App\View\Components\Forms\Alert;
+use App\View\Components\Header\Nav;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        
     }
 }
