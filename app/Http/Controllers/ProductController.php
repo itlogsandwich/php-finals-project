@@ -16,9 +16,8 @@ class ProductController extends Controller
     public function productIndex()
     {
         $products = Product::all();
-        
-       $listings = Listing::with('user_id')->get(); 
-        
+
+        $listings = Listing::select('user_id');
         return view ('products.home', compact('products', 'listings'));
     }
 

@@ -25,11 +25,11 @@
                     <label for = "category"> Choose a category </label>
                     <option selected> Category </option>
                     <option value = "electronics"> Electronics </option>
-                    <option value = "apparel"> Apparel </option> 
-                    <option value = "food"> food </option>
-                    <option value = "medication"> medication </option>
-                    <option value = "tools"> tools </option>
-                    <option value = "miscellaneous"> miscellaneous</option>
+                    <option value = "apparel"> Apparel </option>
+                    <option value = "food"> Food </option>
+                    <option value = "medication"> Medication </option>
+                    <option value = "tools"> Tools </option>
+                    <option value = "miscellaneous"> Miscellaneous</option>
                 </select>
             </div>
             <div class="mb-3">
@@ -42,6 +42,6 @@
             <button type="submit" class="mb-3 btn btn-primary"> Add </button>
         </form>
     </div>
-    
+
     <a href = "/home" class = "mt-2 btn btn-primary"> Back </a>
 </html>
