@@ -37,7 +37,7 @@
                     </div>
                     <div class =  "col-md-4">
 
-                        <a href = {{route('listing.update.form', ['product_id' => $listing->product_id])}}" class = "btn btn-secondary mt-2"> Edit </a>
+                        <a href = {{route('listing.update.form', ['product_id' => $listing->product_id])}}" class = "btn btn-primary mt-2"> Edit </a>
 
                         <form method = "post" action = "{{route('listing.remove', ['product_id' => $listing->product_id])}}" onsubmit = "return confirm('Are you sure you want to remove this listing?')" class = "mt-2">
                             @csrf

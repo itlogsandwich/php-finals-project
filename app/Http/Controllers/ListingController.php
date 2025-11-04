@@ -25,9 +25,13 @@ class ListingController extends Controller
         return view('listings.show', compact('listings'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function listingUpdateForm($product_id)
+    {
+        $product = Product::findOrFail($product_id);
+
+        return view('listings.update', compact('product'));
+    }
+
     public function listingCreate(Request $request)
     {
         $validated = $request->validate([
@@ -55,5 +59,23 @@ class ListingController extends Controller
         $product->delete();
 
         return redirect()->route('listing.show')->with('success message', 'Listing rmemoved successfully');
+    }
+
+
+    public function listingUpdate(Request $request, $product_id)
+    {
+        $product = Product::findOrFail($product_id);
+
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            'category' => 'required|string|in:electronics,apparel,food,medication,tools,miscellaneous',
+            'price' => 'required|numeric|min:0',
+            'image_url' => 'nullable|url',
+        ]);
+
+        $product->update($validated);
+
+        return redirect()->route('listing.show')->with('success message', 'Listing updated successfully');
     }
 }
