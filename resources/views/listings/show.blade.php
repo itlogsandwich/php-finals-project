@@ -25,7 +25,7 @@
             <div class = "card m-2" style = "background-color: rgba(255,255,255, 0.4); width: 50rem;">
                 <div class = "row g-0">
                     <div class = "col-md-4">
-                        <img src = "{{$listing->product->image_url}}" class = "card-img-left" alt = "product image">
+                        <img src = "{{asset('storage/' . $listing->product->image_path)}}" class = "card-img-top" alt = "product image">
                     </div>
                     <div class = "col-md-4">
                         <div class = "card-body">

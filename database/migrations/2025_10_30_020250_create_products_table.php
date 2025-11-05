@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('category');
             $table->decimal('price', 10,2);
-            $table->string('image_url')->nullable();    
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

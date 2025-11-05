@@ -37,12 +37,25 @@ class ListingController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable|string',
-            'category' => 'required|string|in:electronics,apparel,food,medication,tools,miscellaneous',
+            'category' => 'required|string|in:drugs,electronics,apparel,food,tools,miscellaneous',
             'price' => 'required|numeric|min:0',
-            'image_url' => 'nullable|url',
+            'image_path' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $product = Product::create($validated);
+        $imagePath = null;
+        if($request->hasFile('image_path'))
+        {
+            $imagePath = $request->file('image_path')->store('products', 'public');
+        }
+
+
+        $product = Product::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'] ?? null,
+            'category' => $validated['category'],
+            'price' => $validated['price'],
+            'image_path' => $imagePath, // save the stored file path
+        ]);
 
         Listing::create([
             'user_id' => auth()->id(),

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Config\Categories;
 use App\Models\Product;
 use App\Models\Listing;
 use App\Http\Controllers\Controller;
@@ -16,9 +17,9 @@ class ProductController extends Controller
     public function productIndex()
     {
         $products = Product::all();
-
+        $categories = config('categories');
         $listings = Listing::select('user_id');
-        return view ('products.home', compact('products', 'listings'));
+        return view ('products.home', compact('products', 'listings', 'categories'));
     }
 
 }

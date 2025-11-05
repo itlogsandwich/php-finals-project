@@ -15,7 +15,7 @@ class Product extends Model
         'description',
         'category',
         'price',
-        'image_url',
+        'image_path',
     ];
 
     public function listing()
