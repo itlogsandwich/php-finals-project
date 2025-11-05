@@ -10,9 +10,6 @@ use App\Http\Requests\UpdateListingRequest;
 use Illuminate\Http\Request;
 class ListingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function listingForm()
     {
         return view('listings.create');
@@ -54,7 +51,7 @@ class ListingController extends Controller
             'description' => $validated['description'] ?? null,
             'category' => $validated['category'],
             'price' => $validated['price'],
-            'image_path' => $imagePath, // save the stored file path
+            'image_path' => $imagePath,
         ]);
 
         Listing::create([
