@@ -17,9 +17,15 @@ class ProductController extends Controller
     public function productIndex()
     {
         $products = Product::all();
-        $categories = config('categories');
         $listings = Listing::select('user_id');
-        return view ('products.home', compact('products', 'listings', 'categories'));
+        $categories = config('categories');
+
+        $counts = Product::select('category')
+            ->selectRaw('COUNT(*) as total')
+            ->groupBy('category')
+            ->pluck('total', 'category');
+
+        return view ('products.home', compact('products', 'listings', 'categories', 'counts'));
     }
 
 }

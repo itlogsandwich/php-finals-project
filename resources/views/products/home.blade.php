@@ -33,7 +33,7 @@
                         </div>
 
                         <div>
-                            <span class = "badge bg-secondary rounded-pill "> 10 </span>
+                            <span class = "badge bg-secondary rounded-pill "> {{$counts[$category] ?? 0}}</span>
                         </div>
                     </li>
                     @endforeach

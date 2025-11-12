@@ -31,7 +31,7 @@
                         <div class = "card-body">
                             <h3 class ="card-title"> {{$listing->product->name}} </h3>
                             <p class = "card-text fs-5"> {{$listing->product->description}} </p>
-                            <p class = "card-text fs-5"> {{$listing->product->category}} </p>
+                            <p class = "card-text fs-5"> {{ucfirst($listing->product->category)}} </p>
                             <p class = "card-text fs-5"> {{$listing->product->price}} </p>
                         </div>
                     </div>

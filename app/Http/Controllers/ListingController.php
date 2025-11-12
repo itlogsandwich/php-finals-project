@@ -79,7 +79,7 @@ class ListingController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable|string',
-            'category' => 'required|string|in:electronics,apparel,food,medication,tools,miscellaneous',
+            'category' => 'required|string|in:drugs,electronics,apparel,food,tools,miscellaneous',
             'price' => 'required|numeric|min:0',
             'image_url' => 'nullable|url',
         ]);
