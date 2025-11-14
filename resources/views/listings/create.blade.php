@@ -8,6 +8,8 @@
 </head>
 <body class = "container">
 
+    <x-header.nav/>
+
     <div class = "container mt-5 border rounded-2">
         <h1> Product Listing </h1>
         <form method = "post" action = "{{route('listing.create')}}" enctype = "multipart/form-data" class = "mt-4">
