@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Config\Categories;
 use App\Models\Product;
 use App\Models\Listing;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -46,9 +47,10 @@ class ProductController extends Controller
     public function productView($product_id)
     {
         $product = Product::findOrFail($product_id);
-        $listing = Listing::select('user_id')->where('product_id', '=', $product_id);
+        $listing = Listing::findOrFail($product_id);
+        $user = User::findOrFail($listing->user_id);
 
-        return view ('products.view', compact('product', 'listing'));
+        return view ('products.view', compact('product', 'user'));
     }
 
 }

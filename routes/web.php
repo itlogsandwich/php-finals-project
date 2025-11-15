@@ -32,11 +32,14 @@ Route::middleware('auth')->group(function()
     Route::get('/listing/create', [ListingController::class, 'listingForm'])->name('listing.form');
     Route::post('/listing/create', [ListingController::class, 'listingCreate'])->name('listing.create');
 
-    Route::get('listing/show', [ListingController::class, 'listingShow'])->name('listing.show');
-    Route::post('listing/show/{product_id}',[ListingController::class, 'listingRemove'])->name('listing.remove');
+    Route::get('/listing/show', [ListingController::class, 'listingShow'])->name('listing.show');
+    Route::post('/listing/show/{product_id}',[ListingController::class, 'listingRemove'])->name('listing.remove');
 
-    Route::get('listing/update/{product_id}',[ListingController::class, 'listingUpdateForm'])->name('listing.update.form');
-    Route::post('listing/update/{product_id}', [ListingController::class, 'listingUpdate'])->name('listing.update');
+    Route::get('/listing/update/{product_id}',[ListingController::class, 'listingUpdateForm'])->name('listing.update.form');
+    Route::post('/listing/update/{product_id}', [ListingController::class, 'listingUpdate'])->name('listing.update');
+
+    //Route::get('/message/{user_id}', [MessageController::class, 'messageSeller'])->name('messageSeller');
+    //"{{route('messageSeller', ['user_id' => $user->id])}}"
 });
 
 require __DIR__.'/auth.php';

@@ -41,10 +41,10 @@
             <div class = "justify-content">
             <ul class = "list-group">
                 @foreach ($products as $product)
-                <li class = "card" style = "background-color: rgba(255,255,255, 0.4); width: 50rem;">
+                <li class = "card" style = "background-color: rgba(255,255,255, 0.4); max-width: 50rem;">
                         <div class = "row g-0">
                             <div class = "col-md-4">
-                                <img src = "{{asset('storage/' . $product->image_path)}}" class = "card-img m-2" alt = "product image">
+                                <img src = "{{asset('storage/' . $product->image_path)}}" class = "img-fluid rounded-start" alt = "product image">
                             </div>
                             <div class = col-md-4>
                                 <div class = "card-body">
