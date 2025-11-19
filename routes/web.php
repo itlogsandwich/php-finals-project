@@ -4,6 +4,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function()
     Route::get('/listing/update/{product_id}',[ListingController::class, 'listingUpdateForm'])->name('listing.update.form');
     Route::post('/listing/update/{product_id}', [ListingController::class, 'listingUpdate'])->name('listing.update');
 
+    Route::get('/message', [MessageController::class, 'messageShow'])->name('messageShow');
     //Route::get('/message/{user_id}', [MessageController::class, 'messageSeller'])->name('messageSeller');
     //"{{route('messageSeller', ['user_id' => $user->id])}}"
     //Route::get('/listing/favorites', [ListingController::class, 'listingShowFavorites'])->name('listing.show.favorites');

@@ -25,7 +25,7 @@
                     <p class = "fs-3">₱{{$product->price}} </p>
 
                     <div class = "d-flex flex-column text-center">
-                        <a href = "#" class = "mt-2 btn btn-primary rounded-4"> Contact Seller </a>
+                        <a href = "{{route('messageShow')}} "class = "mt-2 btn btn-primary rounded-4"> Contact Seller </a>
                         <a href = "#" class = "mt-2 btn btn-outline-primary rounded-4"> Favorites </a>
                     </div>
 
