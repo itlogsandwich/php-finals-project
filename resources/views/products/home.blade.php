@@ -37,16 +37,15 @@
 
         </div>
 
-        <div class = "flex-grow-1 container-fluid">
-            <div class = "justify-content">
-            <ul class = "list-group">
+        <div class = "d-flex flex-grow-1 container-fluid">
+            <div class = "row justify-content">
                 @foreach ($products as $product)
-                <li class = "card" style = "background-color: rgba(255,255,255, 0.4); max-width: 50rem;">
+                <div class = "card border-success mb-2 me-2" style = "background-color: rgba(255,255,255, 0.4); max-width: 50rem;">
                         <div class = "row g-0">
                             <div class = "col-md-4">
-                                <img src = "{{asset('storage/' . $product->image_path)}}" class = "img-fluid rounded-start" alt = "product image">
+                                <img src = "{{asset('storage/' . $product->image_path)}}" class = "img-fluid rounded" alt = "product image">
                             </div>
-                            <div class = col-md-4>
+                            <div class = "col-md-4">
                                 <div class = "card-body">
                                     <a href = "{{route('productView', ['product_id' => $product->id])}}" class ="card-title d-inline-block p-2 text-decoration-none border border-0 rounded-3 hover-border-primary fs-1" style = "transition: border-color 0.2s;"> {{$product->name}} </a>
                                     <a href = "{{route('productView', ['product_id' => $product->id])}}" class = "stretched-link"> </a>
@@ -56,9 +55,8 @@
                                 </div>
                             </div>
                         </div>
-                </li>
+                </div>
                 @endforeach
-            </ul>
             </div>
         </div>
 

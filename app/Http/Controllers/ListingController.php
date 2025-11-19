@@ -81,8 +81,14 @@ class ListingController extends Controller
             'description' => 'nullable|string',
             'category' => 'required|string|in:drugs,electronics,apparel,food,tools,miscellaneous',
             'price' => 'required|numeric|min:0',
-            'image_url' => 'nullable|url',
+            'image_path' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        $imagePath = null;
+        if($request->hasFile('image_path'))
+        {
+            $imagePath = $request->file('image_path')->store('products', 'public');
+        }
 
         $product->update($validated);
 
