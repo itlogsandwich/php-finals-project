@@ -21,7 +21,6 @@ return new class extends Migration
             $table->boolean('read')->default(0)->nullable();
             $table->text('body')->nullable();
             $table->string('type')->nullable();
-
             $table->timestamps();
         });
     }

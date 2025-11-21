@@ -36,8 +36,8 @@
                         <button type = "button" class = "btn btn-info" > button </button>
                     </div>
 
-                    <form class = "d-flex flex-row">
-                        <input type ="text" class = "form-control" name = "message" placeholder = "Aa" style ="width: 100%;"/>
+                    <form method = "POST" action = "{{route(message.send, ['sender_id' => $user->id, 'receiver_id' => $user_id])}}" class = "d-flex flex-row">
+                        <input type ="text" class = "form-control" name = "body" placeholder = "Aa" style ="width: 100%;"/>
                         <button type = "button" class = "btn btn-primary"> Send </button>
                     </form>
 

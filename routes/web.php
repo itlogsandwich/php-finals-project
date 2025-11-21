@@ -39,11 +39,15 @@ Route::middleware('auth')->group(function()
     Route::get('/listing/update/{product_id}',[ListingController::class, 'listingUpdateForm'])->name('listing.update.form');
     Route::post('/listing/update/{product_id}', [ListingController::class, 'listingUpdate'])->name('listing.update');
 
-    Route::get('/message', [MessageController::class, 'messageShow'])->name('messageShow');
-    //Route::get('/message/{user_id}', [MessageController::class, 'messageSeller'])->name('messageSeller');
-    //"{{route('messageSeller', ['user_id' => $user->id])}}"
     //Route::get('/listing/favorites', [ListingController::class, 'listingShowFavorites'])->name('listing.show.favorites');
     //Route::post('/listing/favorites/{product_id}', [ListingController::class, 'listingAddFavorites'])->name('listing.add.favorites');
+
+    Route::get('/conversation', [ConversationController::class, 'conversationShow'])->name('conversation.show');
+    Route::post('/conversation/start/{receiver_id}', [ConversationController::class, 'conversationStart'])->name('conversation.start');
+    Route::get('/message/{conversation_id}', [MessageController::class, 'messageShow'])->name('message.show');
+    Route::post('message/{conversation_id}', [MessageController::class, 'messageSend'])->name('message.send');
+
+
 });
 
 require __DIR__.'/auth.php';
