@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ConversationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [ProductController::class, 'productIndex'])->name('home');
 Route::get('/home/{category}', [ProductController::class, 'categoryIndex'])->name('viewCategory');
 Route::get('/home/view/{product_id}', [ProductController::class, 'productView'])->name('productView');
+
 //PRODUCT AND LISTING
 Route::middleware('auth')->group(function()
 {
@@ -41,13 +43,15 @@ Route::middleware('auth')->group(function()
 
     //Route::get('/listing/favorites', [ListingController::class, 'listingShowFavorites'])->name('listing.show.favorites');
     //Route::post('/listing/favorites/{product_id}', [ListingController::class, 'listingAddFavorites'])->name('listing.add.favorites');
+});
 
+//MESSAGE AND CONVERSATION
+Route::middleware('auth')->group(function()
+{
     Route::get('/conversation', [ConversationController::class, 'conversationShow'])->name('conversation.show');
     Route::post('/conversation/start/{receiver_id}', [ConversationController::class, 'conversationStart'])->name('conversation.start');
     Route::get('/message/{conversation_id}', [MessageController::class, 'messageShow'])->name('message.show');
     Route::post('message/{conversation_id}', [MessageController::class, 'messageSend'])->name('message.send');
-
-
 });
 
 require __DIR__.'/auth.php';

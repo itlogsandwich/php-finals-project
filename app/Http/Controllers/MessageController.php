@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\ConversationController;
+use App\Models\Conversation;
+use App\Models\Message;
 class MessageController extends Controller
 {
     public function messageShow($id)
     {
-        $conversation = Conversation::with('message.sender')->findOrFail($id);
+        $conversation = Conversation::with('messages.sender')->findOrFail($id);
 
         return view('messages.show', compact('conversation'));
     }

@@ -3,18 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Conversations extends Model
+use App\Models\Conversation;
+class Message extends Model
 {
     protected $fillable = [
+        'conversation_id',
         'sender_id',
         'receiver_id',
-        'last_time_message',
+        'read',
+        'body',
+        'type',
     ];
 
-    public function messages()
+    public function conversation()
     {
-        return $this->hasMany(Message::class);
+        return $this->belongsTo(Conversation::class);
     }
 
     public function sender()

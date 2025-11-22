@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conversation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MessageController;
 
@@ -30,6 +31,6 @@ class ConversationController extends Controller
         ]
         );
 
-        return redirect()->route('messages.show', compact($conversation->id));
+        return redirect()->route('message.show',$conversation->id);
     }
 }

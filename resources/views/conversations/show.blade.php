@@ -6,12 +6,14 @@
                 <div class = "card-header fw-bold">
                     <h1 class = "text-center">Conversations</h1>
                     <ul class = "list-group list-group-flush">
+                        @foreach($conversations as $conversation)
                         <li class = "d-flex flex-row list-group-item justify-content-between rounded rounded-4">
                             <div>
-                                <h4> Messages with yadadyada </h4>
-                                <p> You're so skibidi bro <p>
+                                <h4> $conversation->sender_id</h4>
+                                <p> $conversation->last_time_message</p> 
                             </div>
                         </li>
+                        @endforeach
                     </ul>
                 </div>
                 
@@ -36,7 +38,7 @@
                         <button type = "button" class = "btn btn-info" > button </button>
                     </div>
 
-                    <form method = "POST" action = "{{route(message.send, ['sender_id' => $user->id, 'receiver_id' => $user_id])}}" class = "d-flex flex-row">
+                    <form method = "POST" action = "{{route('message.send', ['sender_id' => $user->id, 'receiver_id' => $user_id])}}" class = "d-flex flex-row">
                         <input type ="text" class = "form-control" name = "body" placeholder = "Aa" style ="width: 100%;"/>
                         <button type = "button" class = "btn btn-primary"> Send </button>
                     </form>

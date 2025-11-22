@@ -25,7 +25,10 @@
                     <p class = "fs-3">₱{{$product->price}} </p>
 
                     <div class = "d-flex flex-column text-center">
-                        <a href = "{{route('messageShow')}} "class = "mt-2 btn btn-primary rounded-4"> Contact Seller </a>
+                        <form method = "POST" action = "{{route('conversation.start', ['receiver_id' => $user->id])}}">
+                            @csrf   
+                            <button href = ""class = "mt-2 btn btn-primary rounded-4" style ="width: 100%;"> Contact Seller </button>
+                        </form>
                         <a href = "#" class = "mt-2 btn btn-outline-primary rounded-4"> Favorites </a>
                     </div>
 
