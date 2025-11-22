@@ -1,16 +1,4 @@
-<!-- TODO - Create Home Page -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-<body>
-
-    <!-- Navbar Component -->
-    <x-header.nav/>
+<x-layouts.main>
 
     <div class = "d-flex flex-row">
 
@@ -47,7 +35,7 @@
                             </div>
                             <div class = "col-md-4">
                                 <div class = "card-body">
-                                    <a href = "{{route('productView', ['product_id' => $product->id])}}" class ="card-title d-inline-block p-2 text-decoration-none border border-0 rounded-3 hover-border-primary fs-1" style = "transition: border-color 0.2s;"> {{$product->name}} </a>
+                                    <a href = "{{route('productView', ['product_id' => $product->id])}}" class ="card-title d-inline-block p-2 text-decoration-none border rounded-3 hover-border-primary fs-1" style = "transition: border-color 0.2s;"> {{$product->name}} </a>
                                     <a href = "{{route('productView', ['product_id' => $product->id])}}" class = "stretched-link"> </a>
                                     <p class = "card-text fs-5"> {{$product->description}} </p>
                                     <p class = "card-text fs-5"> {{ucfirst($product->category)}} </p>
@@ -59,8 +47,5 @@
                 @endforeach
             </div>
         </div>
-
     </div>
-
-</body>
-</html>
+</x-layouts.main>

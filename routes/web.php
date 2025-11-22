@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,13 +37,14 @@ Route::middleware('auth')->group(function()
     Route::post('/listing/create', [ListingController::class, 'listingCreate'])->name('listing.create');
 
     Route::get('/listing/show', [ListingController::class, 'listingShow'])->name('listing.show');
-    Route::post('/listing/show/{product_id}',[ListingController::class, 'listingRemove'])->name('listing.remove');
+    Route::delete('/listing/show/{product_id}',[ListingController::class, 'listingRemove'])->name('listing.remove');
 
     Route::get('/listing/update/{product_id}',[ListingController::class, 'listingUpdateForm'])->name('listing.update.form');
     Route::post('/listing/update/{product_id}', [ListingController::class, 'listingUpdate'])->name('listing.update');
 
-    //Route::get('/listing/favorites', [ListingController::class, 'listingShowFavorites'])->name('listing.show.favorites');
-    //Route::post('/listing/favorites/{product_id}', [ListingController::class, 'listingAddFavorites'])->name('listing.add.favorites');
+    Route::get('/favorite', [FavoriteController::class, 'favoriteShow'])->name('favorite.show');
+    Route::post('/favorite/{listing_id}', [FavoriteController::class, 'favoriteAdd'])->name('favorite.add');
+    Route::delete('/favorite/{favorite_id}', [FavoriteController::class, 'favoriteRemove'])->name('favorite.remove');
 });
 
 //MESSAGE AND CONVERSATION

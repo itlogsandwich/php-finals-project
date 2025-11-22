@@ -18,7 +18,7 @@ class Product extends Model
         'image_path',
     ];
 
-    public function listing()
+    public function listings()
     {
         return $this->hasMany(Listing::class, 'product_id');
     }

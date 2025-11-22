@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    </head>
-    <body>
+<x-layouts.main> 
         <div>
-
-            <x-header.nav/>
-
             <div class = "d-flex">
                 <div class = "container text-center border rounded-2">
                     <img src = "{{asset('storage/' . $product->image_path)}}" class = "m-2 w-50" alt = "product image">
@@ -27,9 +16,12 @@
                     <div class = "d-flex flex-column text-center">
                         <form method = "POST" action = "{{route('conversation.start', ['receiver_id' => $user->id])}}">
                             @csrf   
-                            <button href = ""class = "mt-2 btn btn-primary rounded-4" style ="width: 100%;"> Contact Seller </button>
+                            <button class = "mt-2 btn btn-primary rounded-4" style ="width: 100%;"> Contact Seller </button>
                         </form>
-                        <a href = "#" class = "mt-2 btn btn-outline-primary rounded-4"> Favorites </a>
+                        <form method = "POST" action = "{{route('favorite.add', ['listing_id' => $listing_id])}}">
+                            @csrf
+                            <button class = "mt-2 btn btn-outline-primary rounded-4" style = "width: 100%"> Favorites </button>
+                        </form>
                     </div>
 
                 </div>
@@ -53,5 +45,4 @@
 
             </footer>
         </div>
-    </body>
-</html>
+</x-layouts.main>

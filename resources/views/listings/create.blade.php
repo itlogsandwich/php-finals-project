@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-<body>
-
-    <x-header.nav/>
+<x-layouts.main>
 
     <div class = "container mt-5 border rounded-2">
         <h1> Product Listing </h1>
@@ -47,4 +37,4 @@
     </div>
 
     <a href = "/" class = "mt-2 mb-2 btn btn-primary"> Back </a>
-</html>
+</x-layouts.main>

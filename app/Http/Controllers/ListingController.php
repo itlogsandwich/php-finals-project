@@ -17,7 +17,10 @@ class ListingController extends Controller
 
     public function listingShow()
     {
-        $listings = Listing::with(['user', 'product'])->get();
+        $listings = Listing::with('listing')
+            ->where('user_id', auth()->id())
+            ->get();
+
 
         return view('listings.show', compact('listings'));
     }
@@ -68,7 +71,7 @@ class ListingController extends Controller
 
         $product->delete();
 
-        return redirect()->route('listing.show')->with('success message', 'Listing rmemoved successfully');
+        return redirect()->route('listing.show')->with('success message', 'Listing removed successfully');
     }
 
 

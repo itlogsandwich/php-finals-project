@@ -48,9 +48,10 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($product_id);
         $listing = Listing::findOrFail($product_id);
+        $listing_id = $listing->id;
         $user = User::findOrFail($listing->user_id);
 
-        return view ('products.view', compact('product', 'user'));
+        return view ('products.view', compact('product', 'user', 'listing_id'));
     }
 
 }

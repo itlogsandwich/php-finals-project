@@ -1,8 +1,7 @@
 <x-layouts.main>
-
     <div class = "container mt-5">
 
-    <h1> Your Listings</h1>
+    <h1> Favorites </h1>
     <!-- NEEDS FIXING-->
     <!-- ALERTS BASED ON WHETHER LISTING WAS A SUCCESS OR NOT -->
 
@@ -14,25 +13,22 @@
         <x-forms.alert type = 'danger' :message = "session('error')" />
     @endif
         <div class = "justify-content">
-            @foreach ($listings as $listing)
+            @foreach ($favorites as $favorite)
             <div class = "card m-2" style = "background-color: rgba(255,255,255, 0.4); width: 50rem;">
                 <div class = "row g-0">
                     <div class = "col-md-4">
-                        <img src = "{{asset('storage/' . $listing->product->image_path)}}" class = "card-img-top" alt = "product image">
+                        <img src = "{{asset('storage/' . $favorite->listing->product->image_path)}}" class = "card-img-top" alt = "product image">
                     </div>
                     <div class = "col-md-4">
                         <div class = "card-body">
-                            <h3 class ="card-title"> {{$listing->product->name}} </h3>
-                            <p class = "card-text fs-5"> {{$listing->product->description}} </p>
-                            <p class = "card-text fs-5"> {{ucfirst($listing->product->category)}} </p>
-                            <p class = "card-text fs-5"> {{$listing->product->price}} </p>
+                            <h3 class ="card-title"> {{$favorite->listing->product->name}} </h3>
+                            <p class = "card-text fs-5"> {{$favorite->listing->product->description}} </p>
+                            <p class = "card-text fs-5"> {{ucfirst($favorite->listing->product->category)}} </p>
+                            <p class = "card-text fs-5"> {{$favorite->listing->product->price}} </p>
                         </div>
                     </div>
                     <div class =  "col-md-4">
-
-                        <a href = {{route('listing.update.form', ['product_id' => $listing->product_id])}}" class = "btn btn-primary mt-2"> Edit </a>
-
-                        <form method = "post" action = "{{route('listing.remove', ['product_id' => $listing->product_id])}}" onsubmit = "return confirm('Are you sure you want to remove this listing?')" class = "mt-2">
+                        <form method = "post" action = "{{route('favorite.remove', ['favorite_id' => $favorite->id])}}" onsubmit = "return confirm('Are you sure you want unfavorite?')" class = "mt-2">
                             @csrf
                             @method('DELETE')
                             <button type ="submit" class = "btn btn-danger"> Remove </button>
