@@ -4,15 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Conversation;
+use App\Models\User; 
+
 class Message extends Model
 {
+
+    public const TYPE_TEXT = 'text';
+    public const TYPE_IMAGE = 'image';
+
     protected $fillable = [
         'conversation_id',
         'sender_id',
         'receiver_id',
-        'read',
         'body',
         'type',
+        'is_read', 
     ];
 
     public function conversation()

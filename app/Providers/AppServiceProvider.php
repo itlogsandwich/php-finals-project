@@ -1,25 +1,37 @@
 <?php
 
 namespace App\Providers;
-use App\Providers\Blade;
+
 use Illuminate\Support\ServiceProvider;
-use App\View\Components\Forms\Alert;
-use App\View\Components\Header\Nav;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth; 
+use App\Models\Message;
+
+
+
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+
     }
 
-    /**
-     * Bootstrap any application services.
-     */
+
     public function boot(): void
     {
-        
+
+        View::composer(['layouts.app'], function ($view) {
+            $unreadMessagesCount = 0;
+            
+            if (Auth::check()) {
+
+                $unreadMessagesCount = Message::where('receiver_id', Auth::id())
+                                              ->where('is_read', false)
+                                              ->count();
+            }
+
+            $view->with('unreadMessagesCount', $unreadMessagesCount);
+        });
+
     }
 }

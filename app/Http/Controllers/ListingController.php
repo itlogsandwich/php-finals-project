@@ -17,10 +17,9 @@ class ListingController extends Controller
 
     public function listingShow()
     {
-        $listings = Listing::with('listing')
-            ->where('user_id', auth()->id())
-            ->get();
-
+        $listings = Listing::with('product')
+        ->where('user_id', auth()->id())
+        ->get();
 
         return view('listings.show', compact('listings'));
     }

@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
-        </h2>
+        <h3 class="text-dark-web text-lg" style="text-transform: uppercase;">
+            {{ __('Account Details') }}
+        </h3>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-1 classic-small-text" style="color: #666; font-size: 0.8rem; margin-bottom: 15px;">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
@@ -13,33 +13,35 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-4 space-y-4">
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
+        <div style="margin-bottom: 10px;">
+            <x-input-label for="name" :value="__('USERNAME')" style="font-weight: bold; color: #333; display: block; margin-bottom: 5px;" />
+            <!-- The 'classic-input' class is applied via the x-text-input component -->
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
+        <div style="margin-bottom: 10px;">
+            <x-input-label for="email" :value="__('EMAIL ADDRESS')" style="font-weight: bold; color: #333; display: block; margin-bottom: 5px;" />
+            <!-- The 'classic-input' class is applied via the x-text-input component -->
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
+                <div style="border: 1px dashed #cc0000; padding: 10px; margin-top: 10px;">
+                    <p class="classic-small-text" style="color: #333;">
+                        {{ __('Your email address is currently UNVERIFIED.') }}
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                        <button form="send-verification" class="classic-status-link" style="text-decoration: underline; color: #0000cc; background: none; border: none; padding: 0; cursor: pointer;">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
+                        <p class="mt-2 classic-small-text" style="color: #006600; font-weight: bold;">
                             {{ __('A new verification link has been sent to your email address.') }}
                         </p>
                     @endif
@@ -47,8 +49,9 @@
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div class="flex items-center gap-4 pt-3">
+            <!-- The 'classic-button' class is applied via the x-primary-button component -->
+            <x-primary-button>{{ __('SAVE CHANGES') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -56,8 +59,8 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                    class="classic-small-text" style="color: #486b40; font-weight: bold;"
+                >{{ __('Saved successfully.') }}</p>
             @endif
         </div>
     </form>
