@@ -43,7 +43,7 @@
                             <div class="flex-grow-1">
                                 {{-- Display the name of the OTHER user in the conversation list --}}
                                 <h4 class="m-0 classic-text" style="font-size: 1rem; font-weight: bold;">
-                                    {{ $conversation->otherUser?->name ?? 'Unknown User' }}
+                                    {{ $conversation->receiver->name ?? 'Unknown User' }}
                                 </h4>
                                 
                                 {{-- Display the last message time --}}

@@ -5,46 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JanKamelDroga Anonymous Market</title>
     
-    <!-- Bootstrap CSS (needed for navbar classes like navbar-expand-lg, navbar-toggler) --><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
         body {
-            /* The classic beige background */
             background-color: #f5f5f0; 
             font-family: 'Arial', sans-serif;
         }
-        /* Custom styling for the search input to look sleek */
         .navbar .form-control-sm {
-            padding: 0 8px; /* Reduce vertical padding */
+            padding: 0 8px;
         }
         
-        /* Custom styling for the logo image */
         .navbar-brand .logo-img {
-            height: 40px; /* Increased height for a bigger image */
+            height: 40px;
             width: auto;
             margin-right: 10px;
             vertical-align: middle;
-            /* Removed border and border-radius */
-            /* border: 1px solid #3b5734; */ 
-            /* border-radius: 2px; */
         }
     </style>
 </head>
 <body>
 
-    <!--
-    |--------------------------------------------------------------------------
-    | NAVBAR - Integrating the Unread Message Count ($unreadMessagesCount)
-    |--------------------------------------------------------------------------
-    --><nav class="navbar navbar-expand-lg" style="background-color:#486b40; border-bottom:4px solid #3b5734; padding: 5px 15px;">
+    <nav class="navbar navbar-expand-lg" style="background-color:#486b40; border-bottom:4px solid #3b5734; padding: 5px 15px;">
         <div class="container-fluid">
             
             <a href="{{ route('home') }}" class="navbar-brand" style="color:#fff; font-family:'Georgia', serif; font-size: 24px; font-weight:bold;">
                 
-                <!-- LOGO IMAGE - Path updated using asset() helper --><img src="{{ asset('assets/drags.png') }}" 
+                    <img src="{{ asset('assets/drags.png') }}" 
                      alt="JanKamelDroga Logo" 
                      class="logo-img" 
-                     onerror="this.onerror=null; this.src='https://placehold.co/40x30/cc0000/FFFFFF?text=X';" 
+                     onerror="this.onerror=null;" this.src="'https://placehold.co/40x30/cc0000/FFFFFF?text=X';" 
                      title="JanKamelDroga">
                      
                 JanKamelDroga <span style="font-size:12px; color:#aacc99;">anonymous market</span>
@@ -103,7 +93,7 @@
 
     <!-- Sub-Navbar / Logged In Info -->@auth
     <div style="background-color: #ddd; border-bottom: 1px solid #ccc; padding: 5px 20px; font-size: 12px; color: #555;">
-        Loggied in as: <strong>{{ Auth::user()->name }}</strong> &nbsp;|&nbsp; 
+        Logged in as: <strong>{{ Auth::user()->name }}</strong> &nbsp;|&nbsp; 
         
         <a href="{{ route('profile.edit') }}" style="color:#486b40;">Settings</a> &nbsp;|&nbsp; 
         

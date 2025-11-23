@@ -98,7 +98,7 @@
     <div class="container" style="max-width: 800px; margin-top: 20px;">
 
         {{-- FIX: Use null-safe operator (?->) and a fallback --}}
-        <h2>Conversation with {{ $conversation->otherUser?->name ?? 'Unknown User' }}</h2>
+        <h2>Conversation with {{ $conversation->receiver->name ?? 'Unknown User' }}</h2>
 
         <div class="sr-message-history">
             @foreach ($conversation->messages as $message)
