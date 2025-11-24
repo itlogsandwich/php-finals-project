@@ -20,11 +20,7 @@
                 <span style="font-weight: bold;">NOTICE:</span> New users are advised to read the FAQ before proceeding.
             </p>
             
-            {{--------------------------------------------------}}
-            {{-- CONDITIONAL AUTHENTICATION BLOCK --}}
-            {{--------------------------------------------------}}
             @guest
-                {{-- Displayed when the user is NOT logged in --}}
                 <div class="mt-4">
                     <a href="{{ route('login') }}" class="btn btn-lg rounded-0" 
                         style="background-color: #cc0000; color: white; border: 1px solid #990000; font-weight: bold; margin-right: 15px;">
@@ -36,7 +32,6 @@
                     </a>
                 </div>
             @else
-                {{-- Displayed when the user IS logged in --}}
                 <div class="mt-4">
                     <h2 style="font-size: 20px; color: #3b5734; font-weight: bold;">
                         Welcome back, {{ Auth::user()->name }}
@@ -57,7 +52,6 @@
         </div>
     </div>
 
-    {{-- Marketplace Statistics / Quick Info --}}
     <div class="row text-center">
         <div class="col-md-4">
             <div class="p-3 mb-3 rounded-0" style="border: 1px solid #ccc; background-color: #fff;">
@@ -79,7 +73,6 @@
         </div>
     </div>
     
-    {{-- Call to Action: Browse Listings --}}
     <div class="text-center mt-4">
         <a href="{{ route('home') }}" class="btn btn-lg btn-block rounded-0" 
             style="background-color: #486b40; color: white; border: 2px solid #3b5734; font-size: 18px; width: 100%; max-width: 600px; padding: 10px 0;">
@@ -89,7 +82,7 @@
 
     <div class="text-center mt-5 mb-3">
          <p style="font-size: 12px; color: #888;">
-            Access is logged. Do not attempt illegal activities.
+            All rights reserved™
         </p>
     </div>
 
