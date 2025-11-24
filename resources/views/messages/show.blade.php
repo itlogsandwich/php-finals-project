@@ -97,19 +97,16 @@
     </style>
     <div class="container" style="max-width: 800px; margin-top: 20px;">
 
-        {{-- FIX: Use null-safe operator (?->) and a fallback --}}
         <h2>Conversation with {{ $conversation->receiver->name ?? 'Unknown User' }}</h2>
 
         <div class="sr-message-history">
             @foreach ($conversation->messages as $message)
-                {{-- Determine if the message sender is the authenticated user --}}
                 @php
                     $isCurrentUser = ($message->sender_id === Auth::id());
                 @endphp
 
                 <div class="sr-message-block {{ $isCurrentUser ? 'sr-message-user' : 'sr-message-other' }}">
                     <div class="sr-message-content">
-                        <!-- FIX: Add null check for $message->sender -->
                         <span class="sr-message-sender-name">
                             @if ($isCurrentUser)
                                 You

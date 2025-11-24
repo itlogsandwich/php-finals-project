@@ -49,9 +49,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('conversation.show') }}" style="color:#e0e0e0; font-weight:bold;">
-                                Messages 
-                            </a>
+                            <a class="nav-link" href="{{ route('conversation.show') }}" style="color:#e0e0e0;">Messages</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('listing.show') }}" style="color:#e0e0e0;">Account</a>
@@ -94,7 +92,7 @@
         </div>
     </nav>
 
-    <!-- Sub-Navbar / Logged In Info -->@auth
+    @auth
     <div style="background-color: #ddd; border-bottom: 1px solid #ccc; padding: 5px 20px; font-size: 12px; color: #555;">
         Logged in as: <strong>{{ Auth::user()->name }}</strong> &nbsp;|&nbsp; 
         
