@@ -56,4 +56,10 @@ Route::middleware('auth')->group(function()
     Route::post('message/{conversation_id}', [MessageController::class, 'messageSend'])->name('message.send');
 });
 
+//ADMIN
+Route::middleware('admin')->group(function()
+{
+    Route::get('/index/users', [ProfileController::class, 'index'])->name('admin.index');
+});
+
 require __DIR__.'/auth.php';
