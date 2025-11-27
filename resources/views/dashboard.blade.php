@@ -1,7 +1,7 @@
 <x-layouts.main>
 
 <div class="container" style="max-width: 900px; margin-top: 30px;">
-    
+
     {{-- Main Welcome Banner/Hero Area --}}
     <div class="card rounded-0 shadow-sm" style="border: 2px solid #3b5734; margin-bottom: 30px;">
         <div class="card-header rounded-0" style="background-color: #486b40; color: #fff; text-align: center; padding: 15px;">
@@ -19,14 +19,14 @@
             <p style="font-size: 14px; color: #555;">
                 <span style="font-weight: bold;">NOTICE:</span> New users are advised to read the FAQ before proceeding.
             </p>
-            
+
             @guest
                 <div class="mt-4">
-                    <a href="{{ route('login') }}" class="btn btn-lg rounded-0" 
+                    <a href="{{ route('login') }}" class="btn btn-lg rounded-0"
                         style="background-color: #cc0000; color: white; border: 1px solid #990000; font-weight: bold; margin-right: 15px;">
                         LOG IN
                     </a>
-                    <a href="{{ route('register') }}" class="btn btn-lg rounded-0" 
+                    <a href="{{ route('register') }}" class="btn btn-lg rounded-0"
                         style="background-color: #007bff; color: white; border: 1px solid #0056b3; font-weight: bold;">
                         REGISTER NEW ACCOUNT
                     </a>
@@ -34,14 +34,14 @@
             @else
                 <div class="mt-4">
                     <h2 style="font-size: 20px; color: #3b5734; font-weight: bold;">
-                        Welcome back, {{ Auth::user()->name }}
+                        Welcome, {{ Auth::user()->name }}
                     </h2>
                     <p class="mt-3">
-                        <a href="{{ route('dashboard') }}" class="btn btn-sm rounded-0" 
+                        <a href="{{ route('dashboard') }}" class="btn btn-sm rounded-0"
                             style="background-color: #486b40; color: white; font-weight: bold; margin-right: 10px;">
                             GO TO DASHBOARD
                         </a>
-                        <a href="{{ route('conversation.show') }}" class="btn btn-sm btn-outline-dark rounded-0" 
+                        <a href="{{ route('conversation.show') }}" class="btn btn-sm btn-outline-dark rounded-0"
                             style="border-color: #3b5734; color: #3b5734; font-weight: bold;">
                             VIEW MESSAGES
                         </a>
@@ -72,9 +72,9 @@
             </div>
         </div>
     </div>
-    
+
     <div class="text-center mt-4">
-        <a href="{{ route('home') }}" class="btn btn-lg btn-block rounded-0" 
+        <a href="{{ route('home') }}" class="btn btn-lg btn-block rounded-0"
             style="background-color: #486b40; color: white; border: 2px solid #3b5734; font-size: 18px; width: 100%; max-width: 600px; padding: 10px 0;">
             <i class="fas fa-search me-2"></i> Browse All Listings
         </a>

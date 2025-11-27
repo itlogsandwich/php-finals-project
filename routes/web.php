@@ -13,8 +13,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//TODO - Instead of redirecting to breeze default dashboard, let's redirect to our own personalized dashboard
-//Profile and Dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

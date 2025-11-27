@@ -1,9 +1,9 @@
 <x-layouts.main>
-    
+
     <style>
         /* Base Styling */
         body { font-family: Tahoma, Arial, sans-serif; }
-        a { text-decoration: none; color: #486b40; } 
+        a { text-decoration: none; color: #486b40; }
         a:hover { text-decoration: underline; }
 
         /* Main container box for the product details */
@@ -12,7 +12,7 @@
             border: 1px solid #ddd;
             border-radius: 0;
             padding: 20px;
-            display: flex; 
+            display: flex;
         }
 
         /* Left Column: Image */
@@ -43,7 +43,7 @@
             color: #333;
             font-family: Georgia, serif;
             font-size: 24px;
-            border-bottom: 2px solid #486b40; 
+            border-bottom: 2px solid #486b40;
             padding-bottom: 5px;
             margin-bottom: 15px;
             font-weight: bold;
@@ -91,6 +91,16 @@
             width: 100%;
             font-weight: bold;
         }
+        .sr-btn-danger {
+            background-color: #C9302C;
+            color: white;
+            padding: 8px 15px;
+            font-size: 15px;
+            border: 1px solid #999;
+            border-radius: 0;
+            width: 100%;
+            font-weight: bold;
+        }
 
         /* Similar Items Footer */
         .sr-footer-header {
@@ -122,7 +132,7 @@
 
             <div class="sr-image-panel">
                 <img src="{{ asset('storage/' . $product->image_path) }}" class="sr-product-image" alt="product image">
-                
+
                 <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #777;">
                     Category: {{ ucfirst($product->category) }}
                 </div>
@@ -131,7 +141,7 @@
             <div class="sr-info-panel">
 
                 <h1 class="sr-title">{{ $product->name }}</h1>
-                
+
                 <a href="#" class="sr-seller-link">Vendor: {{ $user->name }}</a>
 
                 <span class="sr-price">฿{{ number_format($product->price, 6) }}</span>
@@ -141,17 +151,32 @@
                     {{ $product->description }}
                 </p>
 
+                @if(Auth::id() !== $user->id)
                 <div style="margin-top: 20px;">
                     <form method="POST" action="{{ route('conversation.start', ['receiver_id' => $user->id]) }}">
-                        @csrf   
+                        @csrf  
                         <button class="sr-btn-primary" type="submit">Contact Seller / Make Offer</button>
                     </form>
-                    
-                    <form method="POST" action="{{ route('favorite.add', ['listing_id' => $listing_id]) }}">
+
+                    <form method="POST" action="{{ route('favorite.add', ['listing_id' => $listing->id]) }}">
                         @csrf
                         <button class="sr-btn-secondary" type="submit">Add to Favorites</button>
                     </form>
                 </div>
+                @else
+                <div style="margin-top: 20px;">
+                    <form method="GET" action="{{ route('listing.update.form', ['product_id' => $listing->product_id]) }}">
+                        @csrf  
+                        <button class="sr-btn-primary" type="submit">Edit Listing</button>
+                    </form>
+
+                    <form method="POST" action="{{ route('listing.remove', ['product_id' => $listing->product_id]) }}" onsubmit="return confirm('Are you sure you want to remove this listing?')" class="mt-2">
+                        @csrf
+                        @method('DELETE')
+                        <button class="sr-btn-danger" type="submit">Remove Listing</button>
+                    </form>
+                </div>
+                @endif
 
             </div>
         </div>
