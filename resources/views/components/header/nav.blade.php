@@ -99,6 +99,11 @@
         <a href="{{ route('profile.edit') }}" style="color:#486b40;">Settings</a> &nbsp;|&nbsp; 
         
         <a href="{{ route('listing.show') }}" style="color:#486b40;">Profile</a>
+
+        @if(Auth::user()->role === 'admin')
+            &nbsp;|&nbsp;
+            <a href="{{ route('admin.index') }}" style="color:#486b40;">View Users</a>
+        @endif
     </div>
     @endauth
 

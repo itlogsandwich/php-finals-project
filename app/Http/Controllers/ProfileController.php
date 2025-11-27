@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -17,6 +18,15 @@ class ProfileController extends Controller
         $users = User::all();
 
         return view('admin.view', compact('users'));
+    }
+
+    public function userRemove($user_id)
+    {
+        $user = User::findOrFail($user_id);
+
+        $user->delete();
+
+        return back()->with('success message', 'User has been removed');
     }
     /**
      * Display the user's profile form.

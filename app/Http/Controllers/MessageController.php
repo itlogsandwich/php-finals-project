@@ -15,8 +15,8 @@ class MessageController extends Controller
 
         $conversation->messages()
                      ->where('receiver_id', auth()->id()) 
-                     ->where('is_read', false)         
-                     ->update(['is_read' => true]);     
+                     ->where('read', false)         
+                     ->update(['read' => true]);     
 
         return view('messages.show', compact('conversation'));
     }
@@ -35,7 +35,7 @@ class MessageController extends Controller
             'receiver_id' => $conversation->sender_id == auth()->id() ? $conversation->receiver_id : $conversation->sender_id,
             'body' => $request->body,
             'type' => 'text',
-            'is_read' => false, 
+            'read' => false, 
         ]);
 
         $conversation->update(['last_time_message' => now()]);

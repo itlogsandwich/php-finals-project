@@ -19,19 +19,19 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-
-        View::composer(['layouts.app'], function ($view) {
+        View::composer(['layouts.app'], function ($view) 
+        {
             $unreadMessagesCount = 0;
             
-            if (Auth::check()) {
+            if (Auth::check()) 
+            {
 
                 $unreadMessagesCount = Message::where('receiver_id', Auth::id())
-                                              ->where('is_read', false)
-                                              ->count();
+                                        ->where('is_read', false)
+                                        ->count();
             }
 
             $view->with('unreadMessagesCount', $unreadMessagesCount);
         });
-
     }
 }

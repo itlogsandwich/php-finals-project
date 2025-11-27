@@ -57,9 +57,10 @@ Route::middleware('auth')->group(function()
 });
 
 //ADMIN
-Route::middleware('admin')->group(function()
+Route::middleware('auth')->group(function()
 {
     Route::get('/index/users', [ProfileController::class, 'index'])->name('admin.index');
+    Route::delete('/index/users/{user_id}', [ProfileController::class, 'userRemove'])->name('admin.remove');
 });
 
 require __DIR__.'/auth.php';
