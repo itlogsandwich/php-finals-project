@@ -18,15 +18,13 @@ class ProductController extends Controller
      */
     public function productIndex()
     {
-        $listings = Listing::all();
+        $listings = Listing::with('product')->get();
 
         $categories = config('categories');
 
-        $counts = Listing::selectRaw('products.category, COUNT(*)as total')
-            ->join('products', 'listings.product_id', '=', 'product_id')
-            ->groupBy('products.category')
-            ->pluck('total', 'products.category');
-
+        $counts = $listings
+            ->groupBy(fn($listing) => $listing->product->category)
+            ->map->count();
         return view ('products.home', compact('listings', 'categories', 'counts'));
     }
 
