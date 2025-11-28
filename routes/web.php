@@ -7,6 +7,8 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\TransactionController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,6 +47,11 @@ Route::middleware('auth')->group(function()
     Route::delete('/favorite/{favorite_id}', [FavoriteController::class, 'favoriteRemove'])->name('favorite.remove');
 });
 
+Route::middleware('auth')->group(function()
+{
+    Route::get('/transaction/history', [TransactionController::class, 'transactionShow'])->name('transaction.show'); 
+    Route::post('/transaction/history/{listing_id}/{buyer_id}/{seller_id}', [TransactionController::class, 'transactionPurchase'])->name('transaction.purchase'); 
+});
 //MESSAGE AND CONVERSATION
 Route::middleware('auth')->group(function()
 {

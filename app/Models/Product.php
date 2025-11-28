@@ -22,4 +22,9 @@ class Product extends Model
     {
         return $this->hasMany(Listing::class, 'product_id');
     }
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'product_id');
+    }
 }

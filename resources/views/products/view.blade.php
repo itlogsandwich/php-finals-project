@@ -153,6 +153,11 @@
 
                 @if(Auth::id() !== $user->id)
                 <div style="margin-top: 20px;">
+                    <form method="POST" action="{{ route('transaction.purchase', ['listing_id' => $listing->id, 'buyer_id' => Auth::id(), 'seller_id' => $user->id]) }}">
+                        @csrf  
+                        <button class="sr-btn-primary" type="submit">Buy Right Away</button>
+                    </form>
+
                     <form method="POST" action="{{ route('conversation.start', ['receiver_id' => $user->id]) }}">
                         @csrf  
                         <button class="sr-btn-primary" type="submit">Contact Seller / Make Offer</button>

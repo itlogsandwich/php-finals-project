@@ -119,25 +119,26 @@
 
         <div class="flex-grow-1">
             <div class="row">
-                @foreach ($products as $product)
+                @foreach ($listings as $listing)
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> 
                     
                     <div class="sr-product-card">
                         
-                        <a href="{{ route('productView', ['product_id' => $product->id]) }}">
-                             <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="sr-card-img">
+                        <a href="{{ route('productView', ['product_id' => $listing->product->id]) }}">
+                             <img src="{{ asset('storage/' . $listing->product->image_path) }}" alt="{{ $listing->product->name }}" class="sr-card-img" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x150/f7f7f7/888888?text=NO+IMAGE';">
                         </a>
                         
                         <div class="sr-card-body">
-                            <a href="{{ route('productView', ['product_id' => $product->id]) }}" class="sr-card-title"> 
-                                {{ $product->name }} 
+                            <a href="{{ route('productView', ['product_id' => $listing->product->id]) }}" class="sr-card-title"> 
+                                {{ $listing->product->name }} 
                             </a>
                             
                             <div class="sr-card-price">
-                                ฿{{ number_format($product->price, 6) }} 
+                                ฿{{ number_format($listing->product->price, 6) }} 
                             </div>
                             
-                            <a href="{{ route('productView', ['product_id' => $product->id]) }}" class="sr-buy-btn">
+                            <a href="{{ route('productView', ['product_id' => $listing->product->id]) }}" class="sr-buy-btn">
                                 View Listing
                             </a>
                         </div>
