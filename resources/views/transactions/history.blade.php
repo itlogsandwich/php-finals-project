@@ -106,7 +106,8 @@
                 
                 <div class="sr-image-section">
                     <a href="{{ route('productView', ['product_id' => $transaction->product->id]) }}">
-                        <img src="{{ asset('storage/' . $transaction->product->image_path) }}" class="sr-favorite-image" alt="product image">
+                        <img src="{{ asset('storage/' . $transaction->product->image_path) }}" class="sr-favorite-image" alt="product image" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x150/f7f7f7/888888?text=NO+IMAGE';">
                     </a>
                 </div>
                 

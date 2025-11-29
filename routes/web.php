@@ -23,7 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //USER WALLET
+    Route::post('/profile', [ProfileController::class, 'cashIn'])->name('profile.wallet');
 });
+
 
 //DISPLAYS THE HOME OR MAIN MENU
 Route::get('/', [ProductController::class, 'productIndex'])->name('home');

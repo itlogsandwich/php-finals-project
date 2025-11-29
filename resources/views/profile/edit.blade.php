@@ -34,11 +34,25 @@
             
             <!-- Update Profile Information Form -->
             <div class="deepweb-container">
+                    <div class="max-w-xl">
+                        <h3 class="text-dark-web text-lg" style="color: #666; text-transform: uppercase;">
+                            {{ __('Account Details') }}
+                        </h3> 
+                        <x-primary-button id="editBtn" type="button" class="btn btn-primary">
+                            Edit Account
+                        </x-primary-button>
+
+                        <div id="editForm" style="display: none;" class="mt-3">
+                            @include('profile.partials.update-profile-information-form')
+                        </div>
+                    </div>
+            </div>
+            <!-- Update Wallet-->
+            <div class="deepweb-container">
                 <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+                    @include('profile.partials.wallet-form')
                 </div>
             </div>
-
             <!-- Update Password Form -->
             <div class="deepweb-container">
                 <div class="max-w-xl">
@@ -52,7 +66,14 @@
                     @include('profile.partials.delete-user-form')
                 </div>
             </div>
-            
+
+            <script>
+                    document.getElementById('editBtn').addEventListener('click', function () {
+                        const editForm = document.getElementById('editForm');
+                        editForm.style.display = (editForm.style.display === 'none') ? 'block' : 'none';
+                        this.style.display = 'none';
+                    });
+            </script>
         </div>
     </div>
 </x-app-layout>

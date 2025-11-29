@@ -123,7 +123,8 @@
             <div class="sr-form-row">
                 <label for="formFile" class="sr-label">Current Image:</label>
                 <div style="margin-bottom: 10px;">
-                    <img src="{{ asset('storage/' . $product->image_path) }}" alt="Current Product Image" style="max-width: 150px; border: 1px solid #ddd;">
+                    <img src="{{ asset('storage/' . $product->image_path) }}" alt="Current Product Image" style="max-width: 150px; border: 1px solid #ddd;"
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x150/f7f7f7/888888?text=NO+IMAGE';">
                 </div>
                 
                 <label for="formFile" class="sr-label">Change Image (Optional)</label>

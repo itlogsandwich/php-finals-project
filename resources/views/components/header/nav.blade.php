@@ -49,7 +49,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('listing.show') }}" style="color:#e0e0e0;">Listings</a>
+                            <a class="nav-link" href="{{ route('listing.show') }}" style="color:#e0e0e0;">Your Listings</a>
                         </li>
                         <li class = "nav-item">
                             <a class ="nav-link" href = "{{route('favorite.show')}}" style = "color: #e0e0e0;">Favorites</a>
@@ -77,7 +77,7 @@
                     <div style="color:white; font-size: 13px;">
                         @auth
                             <span style="color:#ffd700; font-weight:bold; margin-right: 10px;">
-                                ฿0.000000
+                                    ₿ {{number_format(Auth::user()->wallet, 6)}}
                             </span>
 
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">

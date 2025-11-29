@@ -1,9 +1,5 @@
 <section>
     <header>
-        <h3 class="text-dark-web text-lg" style="text-transform: uppercase;">
-            {{ __('Account Details') }}
-        </h3>
-
         <p class="mt-1 classic-small-text" style="color: #666; font-size: 0.8rem; margin-bottom: 15px;">
             {{ __("Update your account's profile information and email address.") }}
         </p>

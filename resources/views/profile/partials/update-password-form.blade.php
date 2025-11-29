@@ -1,6 +1,6 @@
 <section>
     <header>
-        <h3 class="text-dark-web text-lg" style="text-transform: uppercase;">
+        <h3 class="text-dark-web text-lg" style="color: #666; text-transform: uppercase;">
             {{ __('CHANGE PASSWORD') }}
         </h3>
 
