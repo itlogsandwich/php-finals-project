@@ -127,11 +127,11 @@
         }
     </style>
     <div style="max-width: 1000px; margin: 20px auto;">
-
         <div class="sr-detail-box">
 
             <div class="sr-image-panel">
-                <img src="{{ asset('storage/' . $product->image_path) }}" class="sr-product-image" alt="product image">
+                <img src="{{ asset('storage/' . $product->image_path) }}" class="sr-product-image" alt="product image"
+                     onerror="this.onerror=null;this.src='https://placehold.co/200x150/f7f7f7/888888?text=NO+IMAGE';">
 
                 <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #777;">
                     Category: {{ ucfirst($product->category) }}
@@ -153,11 +153,17 @@
 
                 @if(Auth::id() !== $user->id)
                 <div style="margin-top: 20px;">
+
+                    @if(session('errorMessage'))
+                        <div class = "alert alert-danger">
+                            {{session('errorMessage')}}
+                        </div>
+                    @endif
+
                     <form method="POST" action="{{ route('transaction.purchase', ['listing_id' => $listing->id, 'buyer_id' => Auth::id(), 'seller_id' => $user->id]) }}">
                         @csrf  
                         <button class="sr-btn-primary" type="submit">Buy Right Away</button>
                     </form>
-
                     <form method="POST" action="{{ route('conversation.start', ['receiver_id' => $user->id]) }}">
                         @csrf  
                         <button class="sr-btn-primary" type="submit">Contact Seller / Make Offer</button>

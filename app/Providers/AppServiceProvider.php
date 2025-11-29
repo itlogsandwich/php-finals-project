@@ -5,7 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth; 
-use App\Models\Message;
+use Illuminate\Support\Facades\Gate; 
+use App\Models\Product;
 
 
 
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-
+        Gate::define('purchase', function($user, Product $product)
+        {
+            return $user->wallet >= $product->price;
+        });
     }
 }
