@@ -99,6 +99,11 @@
 
         <h2>Conversation with {{ $conversation->receiver->name ?? 'Unknown User' }}</h2>
 
+<div class="card-header fw-bold rounded-0 classic-header" style="padding: 12px 15px;">
+                <h1 class="text-start h5 m-0" style="font-weight: normal;">
+                    Messages & Conversations
+                </h1>
+            </div>
         <div class="sr-message-history">
             @foreach ($conversation->messages as $message)
                 @php
@@ -122,6 +127,8 @@
                 </div>
             @endforeach
         </div>
+
+
 
         <div class="sr-input-container">
             <form method="POST" action="{{ route('message.send', $conversation->id) }}" class="d-flex flex-row">

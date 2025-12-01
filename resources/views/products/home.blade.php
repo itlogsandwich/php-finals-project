@@ -137,7 +137,7 @@
                             <div class="sr-card-price">
                                 ฿{{ number_format($listing->product->price, 6) }} 
                             </div>
-                            
+                                           
                             <a href="{{ route('productView', ['product_id' => $listing->product->id]) }}" class="sr-buy-btn">
                                 View Listing
                             </a>

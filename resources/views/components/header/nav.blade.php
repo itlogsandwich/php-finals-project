@@ -102,10 +102,7 @@
     <div style="background-color: #ddd; border-bottom: 1px solid #ccc; padding: 5px 20px; font-size: 12px; color: #555;">
         Logged in as: <strong>{{ Auth::user()->name }}</strong> &nbsp;|&nbsp;
 
-        <a href="{{ route('profile.edit') }}" style="color:#486b40;">Settings</a> &nbsp;|&nbsp;
-
-        <a href="{{ route('listing.show') }}" style="color:#486b40;">Wallet</a>
-
+        <a href="{{ route('profile.edit') }}" style="color:#486b40;">Settings</a> 
         @if(Auth::user()->role === 'admin')
             &nbsp;|&nbsp;
             <a href="{{ route('admin.index') }}" style="color:#486b40;">View Users</a>

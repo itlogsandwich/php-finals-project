@@ -32,7 +32,8 @@ Route::middleware('auth')->group(function () {
 //DISPLAYS THE HOME OR MAIN MENU
 Route::get('/', [ProductController::class, 'productIndex'])->name('home');
 Route::get('/home/{category}', [ProductController::class, 'categoryIndex'])->name('viewCategory');
-Route::get('/home/view/{product_id}', [ProductController::class, 'productView'])->name('productView');
+
+Route::get('/home/view/{product_id}', [ProductController::class, 'productView'])->name('productView')->middleware('auth');
 
 //PRODUCT AND LISTING
 Route::middleware('auth')->group(function()
