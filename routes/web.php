@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function()
     Route::get('/favorite', [FavoriteController::class, 'favoriteShow'])->name('favorite.show');
     Route::post('/favorite/{listing_id}', [FavoriteController::class, 'favoriteAdd'])->name('favorite.add');
     Route::delete('/favorite/{favorite_id}', [FavoriteController::class, 'favoriteRemove'])->name('favorite.remove');
+
+    Route::get('/faq', [ProfileController::class, 'faqShow'])->name('faq.show');
 });
 
 Route::middleware('auth')->group(function()

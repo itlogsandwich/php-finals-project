@@ -51,9 +51,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('listing.show') }}" style="color:#e0e0e0;">Your Listings</a>
                         </li>
-                        <li class = "nav-item">
-                            <a class ="nav-link" href = "{{route('favorite.show')}}" style = "color: #e0e0e0;">Favorites</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('conversation.show') }}" style="color:#e0e0e0;">Messages</a>
                         </li>
@@ -61,7 +58,10 @@
                             <a class="nav-link" href="{{ route('transaction.show') }}" style="color:#e0e0e0;">Transactions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color:#e0e0e0;">FAQ</a>
+                            <a class="nav-link" href="{{ route('faq.show') }}" style="color:#e0e0e0;">FAQ</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="{{ route('favorite.show') }}" style="color:#e0e0e0;">Favourites</a>
                         </li>
                     @endauth
                 </ul>
