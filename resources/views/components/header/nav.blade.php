@@ -63,6 +63,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" style="color:#e0e0e0;">FAQ</a>
                         </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="{{ route('favorite.show') }}" style="color:#e0e0e0;">Favourites</a>
+                        </li>
                     @endauth
                 </ul>
 
