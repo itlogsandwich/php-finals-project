@@ -30,17 +30,20 @@ class ProductController extends Controller
 
     public function categoryIndex($category)
     {
-        $products = Product::all()
-            ->where('category', '=', $category);
-        $listings = Listing::select('user_id');
+        $products = Listing::with('product')
+            ->whereHas('product', function($query) use ($category)
+            {
+                $query->where('category', $category);
+            })
+            ->get();
+
         $categories = config('categories');
 
-        $counts = Product::select('category')
-            ->selectRaw('COUNT(*) as total')
-            ->groupBy('category')
-            ->pluck('total', 'category');
+        $counts = $listings
+            ->groupBy(fn($listing) => $listing->product->category)
+            ->map->count();
 
-        return view ('products.home', compact('products', 'listings', 'categories', 'counts'));
+        return view ('products.home', compact( 'listings', 'categories', 'counts'));
     }
 
     public function productView($product_id)
