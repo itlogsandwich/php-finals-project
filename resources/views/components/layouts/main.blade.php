@@ -10,4 +10,5 @@
         <x-header.nav/>
         {{$slot}}
     </body>
+    <script src="{{ asset('js/app.js') }}"></script>
 </html>

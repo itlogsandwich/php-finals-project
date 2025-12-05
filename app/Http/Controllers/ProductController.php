@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function categoryIndex($category)
     {
-        $products = Listing::with('product')
+        $listings = Listing::with('product')
             ->whereHas('product', function($query) use ($category)
             {
                 $query->where('category', $category);
@@ -39,7 +39,7 @@ class ProductController extends Controller
 
         $categories = config('categories');
 
-        $counts = $listings
+        $counts = Listing::with('product')->get()
             ->groupBy(fn($listing) => $listing->product->category)
             ->map->count();
 

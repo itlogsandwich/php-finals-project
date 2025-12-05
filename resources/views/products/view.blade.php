@@ -177,7 +177,7 @@
                 @else
                 <div style="margin-top: 20px;">
                     <form method="GET" action="{{ route('listing.update.form', ['product_id' => $listing->product_id]) }}">
-                        @csrf  
+                        @csrf
                         <button class="sr-btn-primary" type="submit">Edit Listing</button>
                     </form>
 

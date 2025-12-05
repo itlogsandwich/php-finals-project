@@ -1,9 +1,9 @@
 <x-layouts.main>
-    
+
     <style>
         /* Base Styling */
         body { font-family: Tahoma, Arial, sans-serif; }
-        
+
         /* Main message history container */
         .sr-message-history {
             height: 500px; /* Fixed height for scrollability */
@@ -20,7 +20,7 @@
             margin-bottom: 10px;
             display: flex; /* Enables alignment */
         }
-        
+
         /* Message bubble/content box */
         .sr-message-content {
             max-width: 70%;
@@ -65,11 +65,11 @@
             font-size: 11px;
             display: block;
         }
-        
+
         /* --- MESSAGE INPUT/FOOTER STYLES (FROM PREVIOUS SNIPPET) --- */
         .sr-input-container {
             border-top: 1px solid #ddd;
-            background-color: #f7f7f7; 
+            background-color: #f7f7f7;
             padding: 10px;
             border-radius: 0;
         }
@@ -80,7 +80,7 @@
             font-size: 13px;
             border-radius: 0;
             background-color: #fff;
-            flex-grow: 1; 
+            flex-grow: 1;
         }
         .sr-btn-send {
             background-color: #486b40; /* Forest Green */
@@ -91,7 +91,7 @@
             border-radius: 0;
             cursor: pointer;
             font-weight: bold;
-            white-space: nowrap; 
+            white-space: nowrap;
             margin-left: 5px;
         }
     </style>
@@ -121,15 +121,12 @@
                                 System
                             @endif
                         </span>
-                        
+
                         {{ $message->body }}
                     </div>
                 </div>
             @endforeach
         </div>
-
-
-
         <div class="sr-input-container">
             <form method="POST" action="{{ route('message.send', $conversation->id) }}" class="d-flex flex-row">
                 @csrf
@@ -137,7 +134,29 @@
                 <button type="submit" class="sr-btn-send">Send</button>
             </form>
         </div>
-        
+
     </div>
 
+<script>
+    window.Echo.channel("conversation.{{ $conversation->id }}")
+        .listen('.message.sent', (event) =>
+        {
+            addMessageToUI(event.message);
+        });
+    function addMessageToUI(message)
+    {
+        const container = document.querySelector('.sr-message-history');
+
+        container.insertAdjacentHTML('beforeend', `
+            <div class="sr-message-block ${message.sender_id == {{ auth()->id() }} ? 'sr-message-user' : 'sr-message-other'}">
+                <div class="sr-message-content">
+                    <span class="sr-message-sender-name">${message.sender_name}</span>
+                    ${message.body}
+                </div>
+            </div>
+        `);
+
+        container.scrollTop = container.scrollHeight;
+    }
+</script>
 </x-layouts.main>
