@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('seller_id');
             $table->foreign('seller_id')->references('id')->on('users');
             $table->string('signature')->nullable();
-            $table->decimal('amount', 10, 2);
+            $table->decimal('amount', 10, 2)->default(0);
             $table->timestamps();
         });
     }

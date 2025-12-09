@@ -9,7 +9,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\Support\Facades\DB;
 class TransactionController extends Controller
 {
 
@@ -31,7 +31,7 @@ class TransactionController extends Controller
 
 
         $listing = Listing::with('product')->findOrFail($listing_id);
-        $product = $listing->product_id;
+        $product = Product::findOrFail($listing->product_id);
 
         $buyer = User::with('wallet')->findOrFail($buyer_id);
         $seller = User::with('wallet')->findOrFail($seller_id);
@@ -54,15 +54,15 @@ class TransactionController extends Controller
 
             $transaction = Transaction::create([
                 'product_id' => $product->id,
-                'buyer_id' => $buyer_id,
-                'seller_id' => $seller_id,
-                'amount' => $product-price,
+                'buyer_id' => $buyer->id,
+                'seller_id' => $seller->id,
+                'amount' => $product->price,
             ]);
 
 
             $listing->delete();
         });
 
-        return redirect()->route('transaction.show', compact('transaction'));
+        return redirect()->route('transaction.show');
     }
 }
