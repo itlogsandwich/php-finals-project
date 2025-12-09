@@ -52,32 +52,29 @@
                             <a class="nav-link" href="{{ route('listing.show') }}" style="color:#e0e0e0;">Your Listings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('conversation.show') }}" style="color:#e0e0e0;">Messages</a>
+                            <a class="nav-link" href="{{ route('favorite.show') }}" style="color:#e0e0e0;">Favourites</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('transaction.show') }}" style="color:#e0e0e0;">Transactions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('faq.show') }}" style="color:#e0e0e0;">FAQ</a>
+                            <a class="nav-link" href="{{ route('conversation.show') }}" style="color:#e0e0e0;">Messages</a>
                         </li>
-                                                <li class="nav-item">
-                            <a class="nav-link" href="{{ route('favorite.show') }}" style="color:#e0e0e0;">Favourites</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('faq.show') }}" style="color:#e0e0e0;">FAQ</a>
                         </li>
                     @endauth
                 </ul>
 
                 <div class="d-flex align-items-center gap-3">
-
-                    <form class="d-flex" role="search">
-                        <input class="form-control form-control-sm rounded-0" type="search" placeholder="search"
-                                style="border:none; height: 28px;">
-                        <button class="btn btn-sm btn-light rounded-0" type="submit" style="height: 31px; line-height: 1;">Go</button>
-                    </form>
-
                     <div style="color:white; font-size: 13px;">
                         @auth
                             <span style="color:#ffd700; font-weight:bold; margin-right: 10px;">
-                                    ₿ {{number_format(Auth::user()->wallet->balance, 6)}}
+                                    @auth
+                                        ₿ {{number_format(Auth::user()->wallet->balance ?? 0, 6) ?? 0}}
+                                    @else
+                                        ₿ 0.000000
+                                    @endauth
                             </span>
 
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">
@@ -102,7 +99,7 @@
     <div style="background-color: #ddd; border-bottom: 1px solid #ccc; padding: 5px 20px; font-size: 12px; color: #555;">
         Logged in as: <strong>{{ Auth::user()->name }}</strong> &nbsp;|&nbsp;
 
-        <a href="{{ route('profile.edit') }}" style="color:#486b40;">Settings</a> 
+        <a href="{{ route('profile.edit') }}" style="color:#486b40;">Settings</a>
         @if(Auth::user()->role === 'admin')
             &nbsp;|&nbsp;
             <a href="{{ route('admin.index') }}" style="color:#486b40;">View Users</a>

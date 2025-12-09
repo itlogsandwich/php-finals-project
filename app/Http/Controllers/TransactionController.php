@@ -25,36 +25,43 @@ class TransactionController extends Controller
 
         return view('transactions.history', compact('transactions'));
     }
+
     public function transactionPurchase($listing_id, $buyer_id, $seller_id)
     {
 
-        $buyer = User::findOrFail($buyer_id);
-        $seller = User::findOrFail($seller_id);
 
-        $listing = Listing::findOrFail($listing_id);
-        $product = Product::findOrFail($listing->product_id);
-       
+        $listing = Listing::with('product')->findOrFail($listing_id);
+        $product = $listing->product_id;
+
+        $buyer = User::with('wallet')->findOrFail($buyer_id);
+        $seller = User::with('wallet')->findOrFail($seller_id);
+
         if(! Gate::allows('purchase', $product))
             return back()->with('errorMessage', 'Insufficient balance!');
 
-        $deduction =  [
-            'wallet' => $buyer->wallet - $product->price,
-        ];
+        $buyerWallet = $buyer->wallet;
+        $sellerWallet = $seller->wallet;
 
-        $profit = [
-            'wallet' => $seller->wallet + $product->price,
-        ];
 
-        $buyer->update($deduction);
-        $seller->update($profit);
+        if ($buyer->id === $seller->id)
+            return back()->with('errorMessage', 'You cannot purchase your own product!');
 
-        $transaction = Transaction::create([
-            'product_id' => $product->id,
-            'buyer_id' => $buyer_id,
-            'seller_id' => $seller_id,
-        ]);
+        DB::transaction(function() use ($buyerWallet, $sellerWallet, $product, $listing, $buyer, $seller)
+        {
+            $buyerWallet->decrement('balance', $product->price);
 
-        $listing->delete();
+            $sellerWallet->increment('balance', $product->price);
+
+            $transaction = Transaction::create([
+                'product_id' => $product->id,
+                'buyer_id' => $buyer_id,
+                'seller_id' => $seller_id,
+                'amount' => $product-price,
+            ]);
+
+
+            $listing->delete();
+        });
 
         return redirect()->route('transaction.show', compact('transaction'));
     }

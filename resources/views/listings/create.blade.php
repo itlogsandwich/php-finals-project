@@ -8,7 +8,7 @@
             max-width: 700px;
             margin: 20px auto;
         }
-        
+
         .sr-header-bar {
             background-color: #486b40; /* SR Green */
             color: white;
@@ -61,7 +61,7 @@
             background: #ddd;
             border-color: #666;
         }
-        
+
         .sr-note {
             background-color: #ffffcc;
             border: 1px solid #e6db55;
@@ -71,6 +71,23 @@
             margin: 15px;
         }
     </style>
+
+
+    @if (session()->has('success'))
+        <div class="alert-success mb-3">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <div class="sr-box">
         <div class="sr-header-bar">
@@ -86,7 +103,7 @@
 
             <div class="sr-form-row">
                 <label for="name" class="sr-label">Item Name</label>
-                <input type="text" class="sr-input" id="name" name="name" placeholder="e.g. Blue Sky Crystal 99%">
+                <input type="text" class="sr-input" id="name" name="name" value = "{{old('name')}}" placeholder="e.g. Blue Sky Crystal 99%">
             </div>
 
             <div class="sr-form-row">

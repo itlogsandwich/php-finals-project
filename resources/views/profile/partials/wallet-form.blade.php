@@ -22,7 +22,6 @@
             margin-bottom: 5px;
             font-family: monospace; /* Monospace font for keys adds a technical feel */
         ">
-            {{ __("Public Key: " . $pubkey) }}
         </h4>
 
         <h4 style="
@@ -31,22 +30,21 @@
             margin-bottom: 15px;
             font-family: monospace;
         ">
-            {{ __("Private Key: " . $privkey) }}
         </h4>
     </header>
 
-    <form method="post" action="{{ route('profile.wallet' ) }}" class="mt-4 space-y-4">
+    <form method="post" action="{{ route('wallet.deposit' ) }}" class="mt-4 space-y-4">
         @csrf
         <div style="margin-bottom: 15px;">
             <x-input-label for="wallet" :value="__('WALLET (Current Balance)')" style="
-                font-weight: bold; 
+                font-weight: bold;
                 color: #384d38; /* Dark green for label */
-                display: block; 
+                display: block;
                 margin-bottom: 8px;
                 font-size: 0.85rem;
             " />
-            
-            <x-text-input id="wallet" name="wallet" type="number" 
+
+            <x-text-input id="wallet" name="wallet" type="number"
                 style="
                     /* Classic Input Style */
                     background-color: #fefefe;
@@ -58,10 +56,10 @@
                     box-sizing: border-box;
                     font-family: monospace; /* Monospace for financial data */
                 "
-                class="mt-1 block w-full" 
-                :value="old('wallet', $user->wallet)" 
-                required autofocus 
-                autocomplete="wallet" 
+                class="mt-1 block w-full"
+                :value="old('wallet', $user->wallet)"
+                required autofocus
+                autocomplete="wallet"
             />
             <x-input-error class="mt-2" :messages="$errors->get('wallet')" style="color: #a00; font-size: 0.8rem;" />
         </div>
@@ -82,7 +80,7 @@
                 {{ __('SAVE CHANGES') }}
             </x-primary-button>
 
-            @if (session('status') === 'profile-updated')
+            @if (session('status') === 'Deposit Successful!')
                 <p
                     x-data="{ show: true }"
                     x-show="show"

@@ -8,6 +8,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WalletController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //USER WALLET
-    Route::post('/profile', [ProfileController::class, 'cashIn'])->name('profile.wallet');
+    Route::post('/profile', [WalletController::class, 'deposit'])->name('wallet.deposit');
 });
 
 
@@ -56,8 +57,8 @@ Route::middleware('auth')->group(function()
 
 Route::middleware('auth')->group(function()
 {
-    Route::get('/transaction/history', [TransactionController::class, 'transactionShow'])->name('transaction.show'); 
-    Route::post('/transaction/history/{listing_id}/{buyer_id}/{seller_id}', [TransactionController::class, 'transactionPurchase'])->name('transaction.purchase'); 
+    Route::get('/transaction/history', [TransactionController::class, 'transactionShow'])->name('transaction.show');
+    Route::post('/transaction/history/{listing_id}/{buyer_id}/{seller_id}', [TransactionController::class, 'transactionPurchase'])->name('transaction.purchase');
 });
 //MESSAGE AND CONVERSATION
 Route::middleware('auth')->group(function()

@@ -1,15 +1,15 @@
 <x-layouts.main>
-    
+
     <style>
         /* Base Styling - Retains Theme Colors */
         body { font-family: Tahoma, Arial, sans-serif; } /* Slightly cleaner font choice */
         a { text-decoration: none; color: #486b40; } /* SR Green links */
         a:hover { text-decoration: underline; }
-        
+
         /* --- CLEANED SIDEBAR STYLES --- */
         .sr-clean-sidebar {
-            width: 240px; 
-            margin-right: 30px; 
+            width: 240px;
+            margin-right: 30px;
             border: 1px solid #ddd;
             background-color: #fff;
             height: fit-content;
@@ -54,12 +54,12 @@
         }
         .sr-product-card:hover {
              border-color: #486b40;
-             box-shadow: 0 0 5px rgba(72, 107, 64, 0.2); 
+             box-shadow: 0 0 5px rgba(72, 107, 64, 0.2);
         }
 
         .sr-card-img {
             max-height: 180px;
-            object-fit: contain; 
+            object-fit: contain;
             width: 100%;
             border-bottom: 1px solid #eee;
             background-color: #fcfcfc;
@@ -104,7 +104,7 @@
             <div class="sr-clean-header">
                 Shop by Category
             </div>
-            
+
             <div>
                 @foreach ($categories as $category)
                 <div class="sr-clean-cat-item">
@@ -120,24 +120,24 @@
         <div class="flex-grow-1">
             <div class="row">
                 @foreach ($listings as $listing)
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> 
-                    
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+
                     <div class="sr-product-card">
-                        
+
                         <a href="{{ route('productView', ['product_id' => $listing->product->id]) }}">
-                             <img src="{{ asset('storage/' . $listing->product->image_path) }}" alt="{{ $listing->product->name }}" class="sr-card-img" 
+                             <img src="{{ asset('storage/' . $listing->product->image_path) }}" alt="{{ $listing->product->name }}" class="sr-card-img"
                              onerror="this.onerror=null;this.src='https://placehold.co/200x150/f7f7f7/888888?text=NO+IMAGE';">
                         </a>
-                        
+
                         <div class="sr-card-body">
-                            <a href="{{ route('productView', ['product_id' => $listing->product->id]) }}" class="sr-card-title"> 
-                                {{ $listing->product->name }} 
+                            <a href="{{ route('productView', ['product_id' => $listing->product->id]) }}" class="sr-card-title">
+                                {{ $listing->product->name }}
                             </a>
-                            
+
                             <div class="sr-card-price">
-                                ฿{{ number_format($listing->product->price, 6) }} 
+                                ฿{{ number_format($listing->product->price, 6) }}
                             </div>
-                                           
+
                             <a href="{{ route('productView', ['product_id' => $listing->product->id]) }}" class="sr-buy-btn">
                                 View Listing
                             </a>

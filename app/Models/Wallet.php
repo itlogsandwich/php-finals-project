@@ -10,7 +10,7 @@ class Wallet extends Model
         'user_id',
         'public_key',
         'private_key',
-        'wallet',
+        'balance',
     ];
 
     protected $casts = [

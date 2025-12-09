@@ -134,13 +134,11 @@
 
 <div class="container mt-4" style="max-width: 900px;">
 
-{{-- HEADER WITH CREATE BUTTON (UPDATED) --}}
 <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 15px;">
     {{-- Title Block --}}
     <div style="background-color:#486b40; color:white; padding: 8px 15px; font-weight: bold; border: 1px solid #3b5734; border-radius: 0;">
         Your Active Listings
     </div>
-    {{-- NEW CREATE LISTING BUTTON --}}
     <a href="{{ route('listing.form') }}" class="sr-btn-create">
         + Create New Listing
     </a>
@@ -162,23 +160,23 @@
     @foreach ($listings as $listing)
     <div class="sr-listing-box">
         <div class="row g-0 sr-listing-body">
-            
+
             <div class="col-md-3 sr-img-container">
-                <img src="{{ asset('storage/' . $listing->product->image_path) }}" 
-                     alt="product image" 
+                <img src="{{ asset('storage/' . $listing->product->image_path) }}"
+                     alt="product image"
                      style="max-height: 150px;"
                      onerror="this.onerror=null;this.src='https://placehold.co/200x150/f7f7f7/888888?text=NO+IMAGE';">
             </div>
-            
+
             <div class="col-md-6 sr-info-panel">
                 <h3 class="sr-title">{{ $listing->product->name }}</h3>
                 <p style="margin-bottom: 5px;">{{ Str::limit($listing->product->description, 100) }}</p>
-                
+
                 <p style="margin-bottom: 5px;">**Category:** {{ ucfirst($listing->product->category) }}</p>
-                
+
                 <p class="sr-price">Price: ₿{{ number_format($listing->product->price, 6) }}</p>
             </div>
-            
+
             <div class="col-md-3 sr-action-panel">
                 {{-- ROUTE PARAMETER: Using product_id as defined in your latest web.php --}}
                 <a href="{{ route('listing.update.form', ['product_id' => $listing->product_id]) }}" class="sr-btn-edit"> Edit Listing </a>
@@ -189,7 +187,7 @@
                     @method('DELETE')
                     <button type="submit" class="sr-btn-remove"> Remove </button>
                 </form>
-                
+
                 <div style="margin-top: 15px; font-size: 11px; color: #888;">
                     Views: 45 | Status: Active
                 </div>
