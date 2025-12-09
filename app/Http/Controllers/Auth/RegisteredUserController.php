@@ -41,6 +41,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        Wallet::create([
+            'user_id' => $user->id,
+            'public_key' => Str::uuid(),
+            'private_key' => bin2hex(random_bytes(32)),
+            'balance' => 0,
+        ]);
+
         event(new Registered($user));
 
         Auth::login($user);

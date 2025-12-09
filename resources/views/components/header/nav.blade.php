@@ -77,7 +77,7 @@
                     <div style="color:white; font-size: 13px;">
                         @auth
                             <span style="color:#ffd700; font-weight:bold; margin-right: 10px;">
-                                    ₿ {{number_format(Auth::user()->wallet, 6)}}
+                                    ₿ {{number_format(Auth::user()->wallet->balance, 6)}}
                             </span>
 
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">

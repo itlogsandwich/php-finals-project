@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('buyer_id')->references('id')->on('users');
             $table->unsignedBigInteger('seller_id');
             $table->foreign('seller_id')->references('id')->on('users');
+            $table->string('signature')->nullable();
             $table->timestamps();
         });
     }
