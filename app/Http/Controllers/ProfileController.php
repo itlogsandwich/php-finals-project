@@ -13,7 +13,7 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-
+    //ADMIN
     public function index()
     {
         $users = User::all();
@@ -21,6 +21,12 @@ class ProfileController extends Controller
         return view('admin.view', compact('users'));
     }
 
+    public function transactionIndex()
+    {
+        $transactions = Transaction::all();
+
+        return view('admin.show.transactions', compact('transactions'));
+    }
     public function userRemove($user_id)
     {
         $user = User::findOrFail($user_id);
@@ -29,6 +35,7 @@ class ProfileController extends Controller
 
         return back()->with('success message', 'User has been removed');
     }
+    //END ADMIN
     /**
      * Display the user's profile form.
      */

@@ -72,8 +72,10 @@ Route::middleware('auth')->group(function()
 //ADMIN
 Route::middleware('auth')->group(function()
 {
-    Route::get('/index/users', [ProfileController::class, 'index'])->name('admin.index');
-    Route::delete('/index/users/{user_id}', [ProfileController::class, 'userRemove'])->name('admin.remove');
+    Route::get('/index/users', [ProfileController::class, 'index'])->name('admin.user.index');
+    Route::delete('/index/users/{user_id}', [ProfileController::class, 'userRemove'])->name('admin.user.remove');
+ 
+    Route::get('/index/transactions', [ProfileController::class, 'transactionIndex'])->name('admin.transaction.index');
 });
 
 require __DIR__.'/auth.php';

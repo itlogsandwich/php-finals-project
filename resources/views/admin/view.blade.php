@@ -11,7 +11,7 @@
             </div>
             
             <div class="col-md-3 sr-action-panel">
-                <form method="post" action="{{ route('admin.remove', ['user_id' => $user->id]) }}" onsubmit="return confirm('Are you sure you want to remove this listing?')" class="mt-2">
+                <form method="post" action="{{ route('admin.user.remove', ['user_id' => $user->id]) }}" onsubmit="return confirm('Are you sure you want to remove this user?')" class="mt-2">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="sr-btn-remove"> Remove </button>

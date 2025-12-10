@@ -102,7 +102,9 @@
         <a href="{{ route('profile.edit') }}" style="color:#486b40;">Settings</a>
         @if(Auth::user()->role === 'admin')
             &nbsp;|&nbsp;
-            <a href="{{ route('admin.index') }}" style="color:#486b40;">View Users</a>
+            <a href="{{ route('admin.user.index') }}" style="color:#486b40;">View Users</a>
+            &nbsp;|&nbsp;
+            <a href="{{ route('admin.transaciton.index') }}" style="color:#486b40;">View Transactions</a>
         @endif
     </div>
     @endauth
