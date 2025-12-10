@@ -66,7 +66,6 @@ Route::middleware('auth')->group(function()
     Route::get('/conversation', [ConversationController::class, 'conversationShow'])->name('conversation.show');
     Route::post('/conversation/start/{receiver_id}', [ConversationController::class, 'conversationStart'])->name('conversation.start');
     Route::get('/message/{conversation_id}', [MessageController::class, 'messageShow'])->name('message.show');
-    Route::post('message/{conversation_id}', [MessageController::class, 'messageSend'])->name('message.send');
 });
 
 //ADMIN
@@ -74,7 +73,7 @@ Route::middleware('auth')->group(function()
 {
     Route::get('/index/users', [ProfileController::class, 'index'])->name('admin.user.index');
     Route::delete('/index/users/{user_id}', [ProfileController::class, 'userRemove'])->name('admin.user.remove');
- 
+
     Route::get('/index/transactions', [ProfileController::class, 'transactionIndex'])->name('admin.transaction.index');
 });
 

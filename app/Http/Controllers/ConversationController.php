@@ -19,16 +19,27 @@ class ConversationController extends Controller
     }
     public function conversationStart($receiver_id)
     {
-       $conversation = Conversation::firstOrCreate(
-        [
-            'sender_id' => auth()->id(),
-            'receiver_id' => $receiver_id,
-        ],
-        [
-            'last_time_message' => now(),
-        ]
-        );
+        $authId = auth()->id();
+        $receiverId = $receiver_id;
 
+        $conversation = Conversation::where(function ($query) use ($authId, $receiverId)
+        {
+            $query->where('sender_id', $authId)
+                  ->where('receiver_id', $receiverId);
+        })->orWhere(function ($query) use ($authId, $receiverId)
+        {
+            $query->where('sender_id', $receiverId)
+                  ->where('receiver_id', $authId);
+        })->first();
+
+        if(!$conversation)
+        {
+            $conversation = Conversation::create([
+                'sender_id' => $authId,
+                'receiver_id' => $receiverId,
+                'last_time_message' => now(),
+            ]);
+        }
         return redirect()->route('message.show',$conversation->id);
     }
 }

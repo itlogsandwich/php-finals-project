@@ -99,64 +99,7 @@
 
         <h2>Conversation with {{ $conversation->receiver->name ?? 'Unknown User' }}</h2>
 
-<div class="card-header fw-bold rounded-0 classic-header" style="padding: 12px 15px;">
-                <h1 class="text-start h5 m-0" style="font-weight: normal;">
-                    Messages & Conversations
-                </h1>
-            </div>
-        <div class="sr-message-history">
-            @foreach ($conversation->messages as $message)
-                @php
-                    $isCurrentUser = ($message->sender_id === Auth::id());
-                @endphp
-
-                <div class="sr-message-block {{ $isCurrentUser ? 'sr-message-user' : 'sr-message-other' }}">
-                    <div class="sr-message-content">
-                        <span class="sr-message-sender-name">
-                            @if ($isCurrentUser)
-                                You
-                            @elseif ($message->sender)
-                                {{ $message->sender->name }}
-                            @else
-                                System
-                            @endif
-                        </span>
-
-                        {{ $message->body }}
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        <div class="sr-input-container">
-            <form method="POST" action="{{ route('message.send', $conversation->id) }}" class="d-flex flex-row">
-                @csrf
-                <input type="text" name="body" placeholder="Aa" class="sr-input-field" required>
-                <button type="submit" class="sr-btn-send">Send</button>
-            </form>
-        </div>
+        <livewire:chat :conversationId="$conversation->id" />
 
     </div>
-
-<script>
-    window.Echo.channel("conversation.{{ $conversation->id }}")
-        .listen('.message.sent', (event) =>
-        {
-            addMessageToUI(event.message);
-        });
-    function addMessageToUI(message)
-    {
-        const container = document.querySelector('.sr-message-history');
-
-        container.insertAdjacentHTML('beforeend', `
-            <div class="sr-message-block ${message.sender_id == {{ auth()->id() }} ? 'sr-message-user' : 'sr-message-other'}">
-                <div class="sr-message-content">
-                    <span class="sr-message-sender-name">${message.sender_name}</span>
-                    ${message.body}
-                </div>
-            </div>
-        `);
-
-        container.scrollTop = container.scrollHeight;
-    }
-</script>
 </x-layouts.main>
