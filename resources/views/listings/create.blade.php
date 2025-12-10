@@ -1,16 +1,18 @@
 <x-layouts.main>
-
     <style>
+        /* ------------------------------------ */
+        /* 1. CORE PHANTOM ROUTE STYLING (Retained) */
+        /* ------------------------------------ */
         .sr-box {
             background-color: #fff;
             border: 1px solid #ccc;
-            padding: 0; /* Padding handled inside */
+            padding: 0;
             max-width: 700px;
             margin: 20px auto;
         }
 
         .sr-header-bar {
-            background-color: #486b40; /* SR Green */
+            background-color: #486b40;
             color: white;
             padding: 8px 15px;
             font-weight: bold;
@@ -38,7 +40,7 @@
             width: 100%;
             font-family: Arial, sans-serif;
             font-size: 13px;
-            border-radius: 0 !important; /* Force square corners */
+            border-radius: 0 !important;
             background-color: #fcfcfc;
         }
         .sr-input:focus {
@@ -70,24 +72,101 @@
             padding: 10px;
             margin: 15px;
         }
+
+        /* ------------------------------------ */
+        /* 2. NEW STYLES FOR ALPINE ALERTS (Cleaned up transition CSS) */
+        /* ------------------------------------ */
+        .sr-alert {
+            max-width: 700px;
+            margin: 20px auto 0;
+            padding: 10px 15px;
+            border-radius: 0;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            
+            /* Remove all transition CSS. Alpine handles it now. */
+            opacity: 1; /* Retain start state */
+        }
+        
+        /* Remove: .sr-alert[x-transition:leave] CSS hook */
+        
+        .sr-alert-success {
+            background-color: #e0f2d8;
+            border: 1px solid #385e38;
+            color: #385e38;
+        }
+        .sr-alert-danger {
+            background-color: #ffe6e6;
+            border: 1px solid #8b0000;
+            color: #8b0000;
+        }
+        .sr-alert-close {
+            background: none;
+            border: none;
+            color: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            margin-left: 10px;
+            padding: 0;
+        }
+        .sr-error-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sr-error-list li {
+            margin-bottom: 3px;
+        }
     </style>
 
 
+    {{-- ----------------------------------------------------------------- --}}
+    {{-- ALPINE.JS ERROR/SUCCESS HANDLING (ROBUST TRANSITION FIX) --}}
+    {{-- ----------------------------------------------------------------- --}}
+
+    {{-- Success Message: Fades out after 5 seconds --}}
     @if (session()->has('success'))
-        <div class="alert-success mb-3">
-            {{ session('success') }}
+        <div x-data="{ show: true }" 
+             x-show="show" 
+             {{-- Explicitly set duration and start/end opacity using Alpine --}}
+             x-transition:leave.duration.500ms 
+             x-transition:enter.opacity.0 
+             x-transition:leave.opacity.0 
+             x-init="setTimeout(() => show = false, 5000)" 
+             class="sr-alert sr-alert-success">
+            
+            <div>{{ session('success') }}</div>
+            <button @click="show = false" class="sr-alert-close">×</button>
         </div>
     @endif
 
+    {{-- Error Messages: Fades out after 10 seconds --}}
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
+        <div x-data="{ show: true }" 
+             x-show="show" 
+             {{-- Explicitly set duration and start/end opacity using Alpine --}}
+             x-transition:leave.duration.700ms 
+             x-transition:enter.opacity.0 
+             x-transition:leave.opacity.0 
+             x-init="setTimeout(() => show = false, 10000)" 
+             class="sr-alert sr-alert-danger">
+            
+            <ul class="sr-error-list">
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li>• {{ $error }}</li>
                 @endforeach
             </ul>
+            <button @click="show = false" class="sr-alert-close">×</button>
         </div>
     @endif
+    
+    {{-- ----------------------------------------------------------------- --}}
 
     <div class="sr-box">
         <div class="sr-header-bar">
@@ -103,24 +182,23 @@
 
             <div class="sr-form-row">
                 <label for="name" class="sr-label">Item Name</label>
-                <input type="text" class="sr-input" id="name" name="name" value = "{{old('name')}}" placeholder="e.g. Blue Sky Crystal 99%">
+                <input type="text" class="sr-input" id="name" name="name" value="{{ old('name') }}" placeholder="e.g. Blue Sky Crystal 99%">
             </div>
 
             <div class="sr-form-row">
                 <label for="description" class="sr-label">Description / Shipping Info</label>
-                <textarea class="sr-input" id="description" name="description" rows="4" style="resize:vertical;"></textarea>
+                <textarea class="sr-input" id="description" name="description" rows="4" style="resize:vertical;">{{ old('description') }}</textarea>
             </div>
 
             <div class="sr-form-row">
                 <label for="category" class="sr-label">Category</label>
                 <select class="sr-input" id="category" name="category" style="width: auto;">
                     <option selected disabled>-- Select Category --</option>
-                    <option value="drugs">Drugs & Narcotics</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="apparel">Apparel</option>
-                    <option value="food">Food</option>
-                    <option value="tools">Tools & Forgeries</option>
-                    <option value="miscellaneous">Miscellaneous</option>
+                    @foreach (['drugs', 'electronics', 'apparel', 'food', 'tools', 'miscellaneous'] as $cat)
+                        <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }}>
+                            {{ ucwords(str_replace('_', ' & ', $cat)) }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
@@ -128,7 +206,7 @@
                 <label for="price" class="sr-label">Price (BTC)</label>
                 <div style="display: flex; align-items: center;">
                     <span style="background:#eee; border:1px solid #aaa; border-right:none; padding:5px 8px; font-weight:bold;">฿</span>
-                    <input type="number" class="sr-input" id="price" name="price" step="0.0001" style="width: 150px;">
+                    <input type="number" class="sr-input" id="price" name="price" step="0.0001" value="{{ old('price') }}" style="width: 150px;">
                 </div>
             </div>
 
@@ -139,7 +217,7 @@
             </div>
 
             <div class="sr-form-row" style="background-color: #f5f5f5; border-top: 1px solid #ddd; text-align: right;">
-                <a href="/" style="font-size: 12px; margin-right: 15px; text-decoration: underline; color: #555;">Cancel</a>
+                <a href="{{ url('/') }}" style="font-size: 12px; margin-right: 15px; text-decoration: underline; color: #555;">Cancel</a>
                 <button type="submit" class="sr-btn-primary">Post Listing</button>
             </div>
 

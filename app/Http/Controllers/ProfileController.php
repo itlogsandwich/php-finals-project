@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\Transaction;
 
 class ProfileController extends Controller
 {
@@ -25,7 +26,7 @@ class ProfileController extends Controller
     {
         $transactions = Transaction::all();
 
-        return view('admin.show.transactions', compact('transactions'));
+       return view('admin.show_transactions', compact('transactions'));
     }
     public function userRemove($user_id)
     {

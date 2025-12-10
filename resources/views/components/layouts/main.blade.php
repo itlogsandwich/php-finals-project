@@ -11,7 +11,8 @@
         <x-header.nav/>
         {{$slot}}
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    @vite(['resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v3.x.x/dist/cdn.min.js" defer></script>
     @livewireScripts
     </body>
 </html>
