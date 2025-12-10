@@ -32,13 +32,14 @@
             <ul class="list-group list-group-flush rounded-0" style="overflow-y: auto;">
                 @foreach($conversations as $conversation)
                     <a href="{{ route('message.show', $conversation->id) }}"
-                       class="text-decoration-none classic-text">
+                        class="text-decoration-none classic-text">
 
                         <li class="d-flex flex-row list-group-item justify-content-between align-items-center rounded-0 p-3 mb-0"
                             style="cursor: pointer; background-color: #fff;">
                             <div class="flex-grow-1">
                                 <h4 class="m-0 classic-text" style="font-size: 1rem; font-weight: bold;">
-                                    {{ $conversation->receiver->name ?? 'Unknown User' }}
+                                    {{-- CRITICAL CHANGE: Display the name of the OTHER user --}}
+                                    {{ $conversation->otherUser->name ?? 'User Not Found' }}
                                 </h4>
                                 <p class="classic-small-text m-0 pt-1">
                                     @if ($conversation->last_time_message && !is_string($conversation->last_time_message))

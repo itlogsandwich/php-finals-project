@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conversation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MessageController;
-
+use Illuminate\Support\Facades\Auth;
 class ConversationController extends Controller
 {
     public function conversationShow()
@@ -15,8 +15,27 @@ class ConversationController extends Controller
             ->with(['sender', 'receiver'])
             ->orderBy('last_time_message', 'desc')
             ->get();
+
+        $conversations = $conversations->map(function ($conversation)
+        {
+            $user = auth()->user();
+
+            if($conversation->sender_id === $user->id)
+                $conversation->otherUser = $conversation->receiver;
+            else
+                $conversation->otherUser = $conversation->sender;
+
+            return $conversation;
+        });
+
+        $conversations = $conversations->filter(function($conversation)
+        {
+            return $conversation->sender_id !== $conversation->receiver_id;
+        });
+
         return view('conversations.show', compact('conversations'));
     }
+
     public function conversationStart($receiver_id)
     {
         $authId = auth()->id();

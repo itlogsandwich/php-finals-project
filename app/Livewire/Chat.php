@@ -13,10 +13,10 @@ class Chat extends Component
 {
     public $conversationId;
     public $body;
+    public $perPage = 20;
+    public $totalMessages = 0;
+    public $hasMoreMessages = true;
 
-    protected $listeners = [
-        'echo:conversation.{conversationId}, MessageSent' => 'handleNewMessage',
-    ];
     protected $rules = [
         'body' => 'required|string'
     ];
@@ -24,11 +24,13 @@ class Chat extends Component
     public function mount($conversationId)
     {
         $this->conversationId = $conversationId;
+        $this->totalMessages = Message::where('conversation_id', $conversationId)->count();
+        $this->hasMoreMessages = $this->totalMessages > $this->perPage;
     }
 
     public function handleNewMessage()
     {
-
+        $this->dispatch('chat-message-sent');
     }
 
     public function sendMessage()
@@ -41,7 +43,7 @@ class Chat extends Component
             ? $conversation->receiver_id
             : $conversation->sender_id;
 
-        $message = Message::create([
+        Message::create([
             'conversation_id' => $conversation->id,
             'sender_id' => Auth::id(),
             'receiver_id' => $receiverId,
@@ -49,9 +51,6 @@ class Chat extends Component
             'read' => false,
             'body' => Crypt::encryptString($this->body),
         ]);
-
-
-        broadcast(new MessageSent($message))->toOthers();
 
         $conversation->update(['last_time_message' => now()]);
 
@@ -63,16 +62,17 @@ class Chat extends Component
 
     public function getMessagesProperty()
     {
-    \Log::info('Fetching messages for Conversation ID: ' . $this->conversationId);
         if (empty($this->conversationId))
             return collect();
 
 
         $messages = Message::where('conversation_id', $this->conversationId)
-            ->with('sender')
-            ->orderBy('created_at')
+            ->with('sender', 'receiver')
+            ->orderBy('created_at', 'desc')
+            ->limit($this->perPage)
             ->get();
 
+        $messages = $messages->reverse();
         $messagesWithDecryption = $messages->map(function ($msg)
         {
             try
@@ -87,6 +87,17 @@ class Chat extends Component
         });
 
         return $messagesWithDecryption;
+    }
+
+    public function loadMoreMessages()
+    {
+        if($this->hasMoreMessages)
+        {
+            $this->perPage += 20;
+
+            if($this->perPage >= $this->totalMessages)
+                $this->hasMoreMessages = false;
+        }
     }
 
     public function render()

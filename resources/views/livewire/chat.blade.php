@@ -1,4 +1,4 @@
-<div wire:poll.1000ms>
+<div wire:poll.3000ms>
     {{-- 1. ADD wire:scroll.end and a wire:key to help Livewire manage the scroll position --}}
 <div class="sr-message-history" id="sr-message-history" wire:key="message-history" wire:scroll.end="loadMoreMessages">
     @foreach ($messages ?? collect() as $message)
