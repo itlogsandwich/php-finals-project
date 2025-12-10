@@ -36,9 +36,14 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $hashedEmail = hash('sha256', $request->email);
+
+        if(User::where('email', $hashedEmail)->exists())
+            return back()->withInput()->withErrors(['email' => 'This email has already been registered']);
+
         $user = User::create([
             'name' => $request->name,
-            'email' => hash('sha256', $request->email),
+            'email' => $hashedEmail,
             'password' => Hash::make($request->password),
         ]);
 
