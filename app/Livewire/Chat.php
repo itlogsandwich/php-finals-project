@@ -48,7 +48,7 @@ class Chat extends Component
             'sender_id' => Auth::id(),
             'receiver_id' => $receiverId,
             'type' => 'text',
-            'read' => false,
+            'is_read' => false,
             'body' => Crypt::encryptString($this->body),
         ]);
 

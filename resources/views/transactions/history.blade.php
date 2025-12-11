@@ -120,6 +120,12 @@
                         {{ Str::limit($transaction->product->description, 100) }} 
                     </p>
                     
+                    <p class="sr-item-text">
+                        **Buyer:** {{ Str::limit($transaction->buyer->name, 100) }} 
+                    </p>
+                    <p class="sr-item-text">
+                        **Seller:** {{ Str::limit($transaction->seller->name, 100) }} 
+                    </p>
                     <p class="sr-item-text"> 
                         **Category:** {{ ucfirst($transaction->product->category) }} 
                     </p>
