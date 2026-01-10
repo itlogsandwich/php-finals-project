@@ -44,7 +44,7 @@ git clone https://github.com/itlogsandwich/black-market-system
 cd black-market-system
 ```
 Before migrating your database and starting the server,
-ensure MYSQL/MariaDB and Apache is already running and listening.
+ensure MYSQL/MariaDB and Apache (XAMPP) is already running and listening.
 ```
 start XAMPP
 
