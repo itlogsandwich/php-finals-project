@@ -57,7 +57,7 @@
                     font-family: monospace; /* Monospace for financial data */
                 "
                 class="mt-1 block w-full"
-                :value="old('wallet', $user->wallet)"
+                :value="old('wallet', $user->wallet->balance)"
                 required autofocus
                 autocomplete="wallet"
             />
