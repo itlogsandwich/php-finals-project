@@ -50,5 +50,5 @@ start XAMPP
 php artisan migrate
 php artisan serve
 ```
-### NOTE: At the time of making this system, I forgot to implement seeders. Feel free to populate the database on your own or create your own seeders.
+### NOTE: As I was making this system, I forgot to implement seeders. Feel free to populate the database on your own or create your own seeders.
 
