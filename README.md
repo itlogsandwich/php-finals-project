@@ -1,6 +1,6 @@
 # Black Market System
 ## About
-Finals school projected created by @luc1ferxzx (Kyle) and I.
+Finals school project created by @luc1ferxzx (Kyle) and I.
 
 We created this website with security and privacy in mind.
 
