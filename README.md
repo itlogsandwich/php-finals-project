@@ -25,7 +25,7 @@ Let it be clear that this is only for our SCHOOL PROJECT and is by no means asso
 
 Clone and navigate to the system
 ```
-git clone https://github.com/itlogsandwich/black-market-system
+git clone git@github.com:itlogsandwich/black-market-system.git
 cd black-market-system
 ```
 Before migrating your database and starting the server,
