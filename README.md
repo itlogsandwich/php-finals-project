@@ -40,8 +40,8 @@ php artisan serve
 ### Windows
 Clone and navigate to the system
 ```
-git clone https://github.com/itlogsandwich/black-market-system
-cd black-market-system
+git clone https://github.com/itlogsandwich/phantom-route
+cd phantom-route
 ```
 Before migrating your database and starting the server,
 ensure MYSQL/MariaDB and Apache (XAMPP) is already running and listening.
