@@ -1,4 +1,4 @@
-# Black Market System
+# Phantom Route
 ## About
 Finals school project created by @luc1ferxzx (Kyle) and I.
 
@@ -25,8 +25,8 @@ This is only for our school project and for fun.
 
 Clone and navigate to the system
 ```
-git clone git@github.com:itlogsandwich/black-market-system.git
-cd black-market-system
+git clone git@github.com:itlogsandwich/phantom-route.git
+cd phantom-route
 ```
 Before migrating your database and starting the server,
 ensure MYSQL/MariaDB and Apache is already running and listening.
